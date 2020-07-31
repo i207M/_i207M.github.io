@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://i207M.github.io</id>
     <title>i207M&apos;s Fantastic Blog</title>
-    <updated>2020-07-31T12:40:31.262Z</updated>
+    <updated>2020-07-31T12:41:11.007Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://i207M.github.io"/>
     <link rel="self" href="https://i207M.github.io/atom.xml"/>
@@ -82,6 +82,7 @@ Jack 24 Beijing Engineer
 <p>如果函数定义中已经有了一个可变参数，后面跟着的命名关键字参数就不再需要一个特殊分隔符<code>*</code>了。</p>
 <h3 id="参数组合">参数组合</h3>
 <p>参数定义的顺序必须是：必选参数、默认参数、可变参数、命名关键字参数和关键字参数。</p>
+<p>使用*args和**kw是Python的习惯写法，当然也可以用其他参数名，但最好使用习惯用法。</p>
 ]]></content>
     </entry>
     <entry>
