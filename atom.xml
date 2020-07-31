@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://i207M.github.io</id>
     <title>i207M&apos;s Fantastic Blog</title>
-    <updated>2020-07-31T12:33:40.879Z</updated>
+    <updated>2020-07-31T12:40:31.262Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://i207M.github.io"/>
     <link rel="self" href="https://i207M.github.io/atom.xml"/>
@@ -33,15 +33,55 @@ set:{}
 enroll(1, 2, d=5) # output: 1 2 1 5
 </code></pre>
 <h3 id="可变参数">可变参数</h3>
+<p>可以传入一个<code>tuple</code>来解决</p>
+<pre><code class="language-python">def calc(numbers):
+    sum = 0
+    for n in numbers:
+        sum = sum + n * n
+    return sum
+
+&gt;&gt;&gt; calc((1,2,3)) # 此处要用双层括号
+14
+</code></pre>
 <pre><code class="language-python">def calc(*numbers):
     sum = 0
     for n in numbers:
         sum = sum + n * n
     return sum
+
+&gt;&gt;&gt; calc(1, 2)
+5
+&gt;&gt;&gt; calc()
+0
+&gt;&gt;&gt; nums = [1, 2, 3]
+&gt;&gt;&gt; calc(*nums)
+14
 </code></pre>
-<p>不加<code>*</code>，可以传入一个<code>tuple</code></p>
-<pre><code class="language-py">def calc(num)
+<p><code>*</code>的作用是将tuple的内容拆成一个个参数然后传入。</p>
+<h3 id="关键字参数">关键字参数</h3>
+<p>可变参数允许你传入0个或任意个参数，这些可变参数在函数调用时自动组装为一个<strong>tuple</strong>。而关键字参数允许你传入0个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个<strong>dict</strong>。</p>
+<pre><code class="language-python">def person(name, age, **kw):
+    print('name:', name, 'age:', age, 'other:', kw)
+
+&gt;&gt;&gt; person('Adam', 45, gender='M', job='Engineer')
+name: Adam age: 45 other: {'gender': 'M', 'job': 'Engineer'}
+            
+&gt;&gt;&gt; extra = {'city': 'Beijing', 'job': 'Engineer'}
+&gt;&gt;&gt; person('Jack', 24, **extra)
+name: Jack age: 24 other: {'city': 'Beijing', 'job': 'Engineer'}
 </code></pre>
+<h3 id="命名关键字参数">命名关键字参数</h3>
+<p>限制关键字参数的名字。</p>
+<pre><code class="language-python">def person(name, age, *, city, job):
+    print(name, age, city, job)
+    
+&gt;&gt;&gt; person('Jack', 24, city='Beijing', job='Engineer')
+Jack 24 Beijing Engineer
+</code></pre>
+<p>命名关键字参数必须传入参数名；命名关键字参数可以有缺省值。</p>
+<p>如果函数定义中已经有了一个可变参数，后面跟着的命名关键字参数就不再需要一个特殊分隔符<code>*</code>了。</p>
+<h3 id="参数组合">参数组合</h3>
+<p>参数定义的顺序必须是：必选参数、默认参数、可变参数、命名关键字参数和关键字参数。</p>
 ]]></content>
     </entry>
     <entry>
