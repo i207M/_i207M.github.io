@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://i207M.github.io/favicon.ico?v=1596199267096">
+<link rel="shortcut icon" href="https://i207M.github.io/favicon.ico?v=1596265724818">
 <link rel="stylesheet" href="https://i207M.github.io/styles/main.css">
 
 
@@ -38,7 +38,7 @@ set:{}
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://i207M.github.io">
-        <img src="https://i207M.github.io/images/avatar.png?v=1596199267096" class="site-logo">
+        <img src="https://i207M.github.io/images/avatar.png?v=1596265724818" class="site-logo">
         <h1 class="site-title">i207M&#39;s Fantastic Blog</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -170,7 +170,84 @@ Jack 24 Beijing Engineer
 <p>如果函数定义中已经有了一个可变参数，后面跟着的命名关键字参数就不再需要一个特殊分隔符<code>*</code>了。</p>
 <h3 id="参数组合">参数组合</h3>
 <p>参数定义的顺序必须是：必选参数、默认参数、可变参数、命名关键字参数和关键字参数。</p>
-<p>使用*args和**kw是Python的习惯写法，当然也可以用其他参数名，但最好使用习惯用法。</p>
+<p>使用<code>*args</code>和<code>**kw</code>是Python的习惯写法，当然也可以用其他参数名，但最好使用习惯用法。</p>
+<h3 id="切片">切片</h3>
+<p><code>s[L:R:D]</code>表示将s的<code>[L,R)</code>间距为D的片段切下来</p>
+<p>特别的，<code>s[:2]</code> 表示切<code>s</code>的前两个元素；<code>s[-2:]</code>表示切<code>s</code>的后两个元素。</p>
+<h3 id="迭代">迭代</h3>
+<pre><code class="language-python">d = {'a': 1, 'b': 2, 'c': 3}
+for key in d:
+    print(key)
+for val in d.values():
+    print(val)
+for it in d.items():
+    print(it)
+</code></pre>
+<p>如果要对list实现类似Java那样的下标循环怎么办？Python内置的<code>enumerate</code>函数可以把一个list变成索引-元素对，这样就可以在<code>for</code>循环中同时迭代索引和元素本身：</p>
+<pre><code class="language-python">for i, val in enumerate(['a', 'b', 'c']):
+    print(i, val)
+    
+0 A
+1 B
+2 C
+
+for x, y in [(1, 1), (2, 4), (3, 9)]:
+	print(x, y)
+</code></pre>
+<h3 id="列表生成式">列表生成式</h3>
+<p>感觉很好用！</p>
+<pre><code class="language-python">L = list(range(1, 11))
+L = [x * x for x in range(1, 11) if x % 2 == 0]
+L = [m + n for m in ['a', 'b', 'c'] for n in ['x', 'y', 'z']]
+</code></pre>
+<h4 id="ifelsefor">if,else,for</h4>
+<pre><code class="language-python">&gt;&gt;&gt; [x if x % 2 == 0 else -x for x in range(1, 11)]
+[-1, 2, -3, 4, -5, 6, -7, 8, -9, 10]
+</code></pre>
+<p>在一个列表生成式中，<code>for</code>前面的<code>if ... else</code>是表达式，而<code>for</code>后面的<code>if</code>是过滤条件，不能带<code>else</code>。</p>
+<h3 id="生成器">生成器</h3>
+<p>简单的生成器相当于把list换成tuple。生成器只有next方式调出下一个，不能随机访问。可以用for遍历。</p>
+<pre><code class="language-python">g = (x * x for x in range(10))
+print(next(g))
+for x in g:
+    print(x, end=' ')
+
+0
+1 4 9 16 25 36 49 64 81
+
+# 斐波那契数列生成器
+def fib():
+    a, b = 0, 1
+    while True:
+        yield b # ！！！
+        a, b = b, a + b
+
+
+f = fib()
+for x in f:
+    print(x)
+    input()
+</code></pre>
+<p>变成generator的函数，在每次调用<code>next()</code>的时候执行，遇到<code>yield</code>语句返回，再次执行时从上次返回的<code>yield</code>语句处继续执行。</p>
+<p>generator函数也可以有返回值。如果想要拿到返回值，必须捕获<code>StopIteration</code>错误，返回值包含在<code>StopIteration</code>的<code>value</code>中。</p>
+<pre><code class="language-python">def triangles():
+    A = []
+    while True:
+        for i in range(len(A) - 1, 0, -1):
+            A[i] += A[i - 1]
+        A.append(1)
+        yield list(A)
+</code></pre>
+<p>以上是生成杨辉三角的生成器，值得注意的一点是，函数如果直接返回A，那么在函数里A的值改变的话，导出的A的值也会变。</p>
+<p>改进版：</p>
+<pre><code class="language-python">def triangles():
+    A = [1]
+    yield A
+    while True:
+        A = [1] + [A[i] + A[i + 1] for i in range(len(A) - 1)] + [1]
+        yield A
+</code></pre>
+<p>为什么这样就可以返回A了呢，因为每经过一次赋值操作，A的地址都会重新分配。</p>
 
             </div>
             
