@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://i207M.github.io/favicon.ico?v=1596265724818">
+<link rel="shortcut icon" href="https://i207M.github.io/favicon.ico?v=1596290064840">
 <link rel="stylesheet" href="https://i207M.github.io/styles/main.css">
 
 
@@ -38,7 +38,7 @@ set:{}
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://i207M.github.io">
-        <img src="https://i207M.github.io/images/avatar.png?v=1596265724818" class="site-logo">
+        <img src="https://i207M.github.io/images/avatar.png?v=1596290064840" class="site-logo">
         <h1 class="site-title">i207M&#39;s Fantastic Blog</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -248,6 +248,182 @@ for x in f:
         yield A
 </code></pre>
 <p>为什么这样就可以返回A了呢，因为每经过一次赋值操作，A的地址都会重新分配。</p>
+<h3 id="mapreduce">map&amp;reduce</h3>
+<p>我们先看map。<code>map()</code>函数接收两个参数，一个是函数，一个是<code>Iterable</code>，<code>map</code>将传入的函数依次作用到序列的每个元素，并把结果作为新的<code>Iterator</code>返回。</p>
+<pre><code class="language-python">def f(x):
+	return x * x
+
+&gt;&gt;&gt; r = map(f, [1, 2, 3, 4, 5, 6, 7, 8, 9])
+&gt;&gt;&gt; list(r)
+[1, 4, 9, 16, 25, 36, 49, 64, 81]
+</code></pre>
+<p><code>reduce</code>把一个函数作用在一个序列<code>[x1, x2, x3, ...]</code>上，这个函数必须接收两个参数，<code>reduce</code>把结果继续和序列的下一个元素做累积计算，其效果就是：</p>
+<pre><code>reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)
+</code></pre>
+<p>比方说对一个序列求和，就可以用<code>reduce</code>实现：</p>
+<pre><code class="language-python">from functools import reduce
+def add(x, y):
+	return x + y
+
+&gt;&gt;&gt; reduce(add, [1, 3, 5, 7, 9])
+25
+</code></pre>
+<p>利用此方法可以方便的实现str转int：</p>
+<pre><code class="language-python">def str2int(s):
+    def fn(x, y):
+        return x * 10 + y
+    def char2num(s):
+        return DIGITS[s]
+    return reduce(fn, map(char2num, s))
+
+# lambda
+
+def char2num(s):
+    return DIGITS[s]
+
+def str2int(s):
+    return reduce(lambda x, y: x * 10 + y, map(char2num, s))
+
+# str2float
+
+def str2float(s):
+    def merge(x, y):
+        return x * 10 + y
+
+    def str2num(s):
+        return reduce(merge, map(int, s))
+
+    p = 0
+    while p &lt; len(s) and s[p] != '.':
+        p += 1
+    if p == len(s):
+        return str2num(s)
+    return str2num(s[:p]) + str2num(s[p + 1:]) * 0.1**(len(s) - p - 1)
+
+# 写的还是太长，等学会lambda和str的函数再简化吧
+</code></pre>
+<h3 id="filter">filter</h3>
+<p>接收一个函数和一个序列，返回一个Iterator，只保留True的元素。</p>
+<pre><code class="language-python">def is_palindrome(n):
+    s = str(n)
+    return s == s[::-1]
+</code></pre>
+<p>筛回文好简单...</p>
+<h3 id="sorted">sorted</h3>
+<p>我们给<code>sorted</code>传入key函数，即可实现忽略大小写的排序：</p>
+<pre><code class="language-python">&gt;&gt;&gt; sorted(['bob', 'about', 'Zoo', 'Credit'], key=str.lower)
+['about', 'bob', 'Credit', 'Zoo']
+</code></pre>
+<p>要进行反向排序，不必改动key函数，可以传入第三个参数<code>reverse=True</code>：</p>
+<pre><code class="language-python">&gt;&gt;&gt; sorted(['bob', 'about', 'Zoo', 'Credit'], key=str.lower, reverse=True)
+['Zoo', 'Credit', 'bob', 'about']
+</code></pre>
+<h3 id="闭包">闭包</h3>
+<p>大杀器。类似于C++中的lamba.</p>
+<p>返回一个函数，这个函数会同时包含它所需要的变量。</p>
+<p>需要注意的问题：</p>
+<p>返回的函数没有立即执行，而是等到调用才执行。 <strong>返回闭包时牢记一点：返回函数不要引用任何循环变量，或者后续会发生变化的变量。</strong></p>
+<p>如果一定要引用循环变量怎么办？方法是再创建一个函数，用该函数的参数绑定循环变量当前的值，无论该循环变量后续如何更改，已绑定到函数参数的值不变：</p>
+<pre><code class="language-python">def count():
+    def f(j):
+        def g():
+            return j*j
+        return g
+    fs = []
+    for i in range(1, 4):
+        fs.append(f(i)) # f(i)立刻被执行，因此i的当前值被传入f()
+    return fs
+</code></pre>
+<h4 id="创建计数器">创建计数器</h4>
+<p>这道题很妙啊。</p>
+<pre><code class="language-python">def createCounter():
+    n = 0
+
+    def counter():
+        nonlocal n # 声明这是外层的变量
+        n += 1
+        return n
+
+    return counter
+
+def createCounter():
+    n = [0]
+
+    def counter():
+        n[0] += 1 # 为什么这里可以修改？因为n这个变量实际上是指向一片内存地址！
+        return n[0]
+
+    return counter
+</code></pre>
+<h3 id="匿名函数">匿名函数</h3>
+<p>关键字<code>lambda</code>表示匿名函数，冒号前面的<code>x</code>表示函数参数，冒号后面的表达式是返回值。</p>
+<h3 id="装饰器">装饰器</h3>
+<p>函数对象有一个<code>__name__</code>属性，可以拿到函数的名字：</p>
+<pre><code class="language-python">&gt;&gt;&gt; f=now
+&gt;&gt;&gt; now.__name__
+'now'
+&gt;&gt;&gt; f.__name__
+'now'
+</code></pre>
+<p>假设我们要在<code>now</code>函数调用前后自动打印日志，但又不希望修改<code>now()</code>函数的定义，这种在代码运行期间动态增加功能的方式，称之为“装饰器”。</p>
+<p>本质上，decorator就是一个返回函数的高阶函数，可以定义如下：</p>
+<pre><code class="language-python">def log(func):
+    def wrapper(*args, **kw):
+        print('call %s():' % func.__name__)
+        return func(*args, **kw)
+    return wrapper
+</code></pre>
+<p>我们可以借助Python的@语法，把decorator置于函数的定义处：</p>
+<pre><code class="language-python">@log
+def now():
+    pass
+</code></pre>
+<p>调用<code>now()</code>函数，不仅会运行<code>now()</code>函数本身，还会在运行<code>now()</code>函数前打印一行日志。</p>
+<p>把<code>@log</code>放到<code>now()</code>函数的定义处，相当于执行了语句：</p>
+<pre><code class="language-python">now = log(now)
+</code></pre>
+<p><code>wrapper()</code>函数的参数定义是<code>(*args, **kw)</code>，因此，<code>wrapper()</code>函数可以接受任意参数的调用。</p>
+<p>decorater本身也可以传入参数：</p>
+<p>比如，要自定义log的文本：</p>
+<pre><code class="language-python">def log(text):
+    def decorator(func):
+        def wrapper(*args, **kw):
+            print('%s %s():' % (text, func.__name__))
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+</code></pre>
+<p>这个3层嵌套的decorator用法如下：</p>
+<pre><code class="language-python">@log('execute')
+def now():
+    pass
+</code></pre>
+<p>但是，这样装饰之后的 函数，它的<code>__name__</code>已经不是原来的函数了。Python内置的<code>functools.wraps</code>就是干这个事的，所以，一个完整的decorator的写法如下：</p>
+<pre><code class="language-python">import functools
+
+def log(func):
+    @functools.wraps(func) # !!!
+    def wrapper(*args, **kw):
+        print('call %s():' % func.__name__)
+        return func(*args, **kw)
+    return wrapper
+</code></pre>
+<p>请设计一个decorator，它可作用于任何函数上，并打印该函数的执行时间：</p>
+<pre><code class="language-python">def metric(fn):
+    @functools.wraps(fn)
+    def warpper(*args, **kw):
+        s = time.time()
+        r = fn(*args, **kw)
+        e = time.time()
+        print('%s run in %.2f ms' % (fn.__name__, e - s))
+        return r
+
+    return warpper
+</code></pre>
+<h3 id="偏函数">偏函数</h3>
+<pre><code class="language-python">int2 = functools.partial(int, base=2)
+</code></pre>
+<p>固定函数的参数。</p>
 
             </div>
             
