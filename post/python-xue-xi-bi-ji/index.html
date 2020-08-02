@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://i207M.github.io/favicon.ico?v=1596290064840">
+<link rel="shortcut icon" href="https://i207M.github.io/favicon.ico?v=1596336240335">
 <link rel="stylesheet" href="https://i207M.github.io/styles/main.css">
 
 
@@ -38,7 +38,7 @@ set:{}
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://i207M.github.io">
-        <img src="https://i207M.github.io/images/avatar.png?v=1596290064840" class="site-logo">
+        <img src="https://i207M.github.io/images/avatar.png?v=1596336240335" class="site-logo">
         <h1 class="site-title">i207M&#39;s Fantastic Blog</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -248,6 +248,7 @@ for x in f:
         yield A
 </code></pre>
 <p>为什么这样就可以返回A了呢，因为每经过一次赋值操作，A的地址都会重新分配。</p>
+<h2 id="81">8.1</h2>
 <h3 id="mapreduce">map&amp;reduce</h3>
 <p>我们先看map。<code>map()</code>函数接收两个参数，一个是函数，一个是<code>Iterable</code>，<code>map</code>将传入的函数依次作用到序列的每个元素，并把结果作为新的<code>Iterator</code>返回。</p>
 <pre><code class="language-python">def f(x):
@@ -424,6 +425,68 @@ def log(func):
 <pre><code class="language-python">int2 = functools.partial(int, base=2)
 </code></pre>
 <p>固定函数的参数。</p>
+<h2 id="82">8.2</h2>
+<h3 id="模块">模块</h3>
+<pre><code class="language-python">'A module'  # 任何模块代码的第一个字符串都被视为模块的文档注释，可以用__doc__调用
+
+__author__ = 'i207M' # 标准模板
+
+import sys
+
+
+def run():
+    print(sys.argv) # sys模块定义了sys.argv，本质是list，储存了调用这个py文件的参数
+
+
+if __name__ == '__main__': # 当且仅当它是独立运行而不是被import进别的py时，此判断为True
+    run()
+</code></pre>
+<p>运行<code>python3 hello.py</code>获得的<code>sys.argv</code>就是<code>['hello.py']</code>；</p>
+<p>运行<code>python3 hello.py Michael</code>获得的<code>sys.argv</code>就是<code>['hello.py', 'Michael']</code>。</p>
+<h4 id="作用域">作用域</h4>
+<p>正常函数的命名是公开的。</p>
+<p>类似<code>__xxx__</code>这样的变量是特殊变量，可以被直接引用，但是有特殊用途，如<code>__author__</code>，<code>__name__</code>，<code>__doc__</code>。</p>
+<p>类似<code>_xxx</code>和<code>__xxx</code>这样的函数或变量就是非公开的，不应该被直接引用。不应该，不是不能。</p>
+<h3 id="面向对象oop">面向对象OOP</h3>
+<p><code>__init__</code>方法相当于构造函数。注意到<code>__init__</code>方法的第一个参数永远是<code>self</code>，表示创建的实例本身。</p>
+<p>如果要让内部属性不被外部访问，可以把属性的名称前加上两个下划线<code>__</code>，这样在外部就真的无法访问。但是在外部定义class的<code>__</code>开头的变量是可以被访问的。</p>
+<p>在Python中，变量名类似<code>__xxx__</code>的，也就是以双下划线开头，并且以双下划线结尾的，是特殊变量，特殊变量是可以直接访问的，不是private变量，所以，不能用<code>__name__</code>、<code>__score__</code>这样的变量名。</p>
+<p>有些时候，你会看到以一个下划线开头的实例变量名，比如<code>_name</code>，这样的实例变量外部是可以访问的，但是，按照约定俗成的规定，当你看到这样的变量时，意思就是，“虽然我可以被访问，但是，请把我视为私有变量，不要随意访问”。</p>
+<p>这就是著名的**“开闭”原则**：</p>
+<p>对扩展开放：允许新增<code>Animal</code>子类；</p>
+<p>对修改封闭：不需要修改依赖<code>Animal</code>类型的<code>run_twice()</code>等函数。</p>
+<p><em>“鸭子类型”：它并不要求严格的继承体系，一个对象只要“看起来像鸭子，走起路来像鸭子”，那它就可以被看做是鸭子。</em></p>
+<h4 id="type">type</h4>
+<p>type返回类型，是严格的类型，同一个父类下的子类互不相同。</p>
+<p>使用<code>instance()</code>函数可以判断继承类型。</p>
+<h3 id="类和实例">类和实例</h3>
+<p>实际上，在<code>len()</code>函数内部，它自动去调用该对象的<code>__len__()</code>方法。</p>
+<p>配合<code>getattr()</code>、<code>setattr()</code>以及<code>hasattr()</code>，我们可以直接操作一个对象的状态。</p>
+<p>为了统计学生人数，可以给Student类增加一个类属性，每创建一个实例，该属性自动增加：</p>
+<pre><code class="language-python">class Student(object):
+    count = 0
+
+    def __init__(self, name):
+        self.name = name
+        Student.count += 1 # 方便！
+</code></pre>
+<h4 id="给实例绑定一个方法">给实例绑定一个方法</h4>
+<pre><code class="language-python">&gt;&gt;&gt; def set_age(self, age): # 定义一个函数作为实例方法
+...     self.age = age
+...
+&gt;&gt;&gt; from types import MethodType
+&gt;&gt;&gt; s.set_age = MethodType(set_age, s) # 给实例绑定一个方法，只有s能调用
+
+&gt;&gt;&gt; def set_score(self, score):
+...     self.score = score
+...
+&gt;&gt;&gt; Student.set_score = set_score # 所有实例都可以调用
+</code></pre>
+<p>Python允许在定义class的时候，定义一个特殊的<code>__slots__</code>变量，来限制该class实例能添加的属性：</p>
+<pre><code class="language-python">class Student(object):
+    __slots__ = ('name', 'age') # 用tuple定义允许绑定的属性名称
+</code></pre>
+<p>对子类不起作用，除非在子类中也定义<code>__slots__</code>，这样，子类实例允许定义的属性就是自身的<code>__slots__</code>加上父类的<code>__slots__</code>。</p>
 
             </div>
             
