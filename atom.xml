@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://i207M.github.io</id>
     <title>i207M&apos;s Fantastic Blog</title>
-    <updated>2020-08-02T02:44:05.234Z</updated>
+    <updated>2020-08-02T14:10:34.895Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://i207M.github.io"/>
     <link rel="self" href="https://i207M.github.io/atom.xml"/>
@@ -368,10 +368,71 @@ if __name__ == '__main__': # 当且仅当它是独立运行而不是被import进
 <p>对扩展开放：允许新增<code>Animal</code>子类；</p>
 <p>对修改封闭：不需要修改依赖<code>Animal</code>类型的<code>run_twice()</code>等函数。</p>
 <p><em>“鸭子类型”：它并不要求严格的继承体系，一个对象只要“看起来像鸭子，走起路来像鸭子”，那它就可以被看做是鸭子。</em></p>
+<p><code>print</code>一个class，实质会调用<code>__str__()</code>函数，打印此函数的返回值。直接在控制台输入变量，打印的实例是调用<code>__repr__()</code>。</p>
+<h4 id="定制类">定制类</h4>
+<p>定义了<code>__iter__(),__next__()</code>，就可以被用于<code>for ... in</code>循环：</p>
+<pre><code class="language-python">class Fib(object):
+    def __init__(self):
+        self._a, self._b = 0, 1
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        self._a, self._b = self._b, self._a + self._b
+        if self._a &gt; 1000:
+            raise StopIteration()
+        return self._a
+</code></pre>
+<p>实现<code>__getitem__()</code>方法，可以按下标访问任意一项。</p>
+<p>当调用不存在的属性时，Python解释器会试图调用<code>__getattr__(self, 'name')</code>来尝试获得属性。</p>
+<p>利用完全动态的<code>__getattr__</code>，我们可以写出一个链式调用：</p>
+<pre><code class="language-python">class Chain(object):
+
+    def __init__(self, path=''):
+        self._path = path
+
+    def __getattr__(self, path):
+        return Chain('%s/%s' % (self._path, path))
+
+    def __str__(self):
+        return self._path
+
+    __repr__ = __str__
+</code></pre>
+<p>试试：</p>
+<pre><code class="language-python">&gt;&gt;&gt; Chain().status.user.timeline.list
+'/status/user/timeline/list'
+</code></pre>
+<p>Niubi</p>
+<p>任何类，只需要定义一个<code>__call__()</code>方法，就可以直接对实例进行调用。</p>
+<pre><code class="language-python">class Chain(object):
+    def __init__(self, path=''):
+        self.path = path
+
+    def __getattr__(self, attr):
+        return Chain(&quot;%s/%s&quot; % (self.path, attr))
+
+    def __call__(self, *args):
+        _self = self
+        for i in args:
+            _self = Chain(&quot;%s/%s&quot; % (_self.path, i))
+        return _self
+
+    def __str__(self):
+        return self.path
+
+    __repr__ = __str__
+
+
+&gt;&gt;&gt; print(Chain().a(&quot;hello&quot;, &quot;good&quot;).b)
+/a/hello/good/b
+</code></pre>
 <h4 id="type">type</h4>
 <p>type返回类型，是严格的类型，同一个父类下的子类互不相同。</p>
 <p>使用<code>instance()</code>函数可以判断继承类型。</p>
 <h3 id="类和实例">类和实例</h3>
+<p>可以定义类属性和实例属性，实例属性优先于类属性。</p>
 <p>实际上，在<code>len()</code>函数内部，它自动去调用该对象的<code>__len__()</code>方法。</p>
 <p>配合<code>getattr()</code>、<code>setattr()</code>以及<code>hasattr()</code>，我们可以直接操作一个对象的状态。</p>
 <p>为了统计学生人数，可以给Student类增加一个类属性，每创建一个实例，该属性自动增加：</p>
@@ -399,6 +460,33 @@ if __name__ == '__main__': # 当且仅当它是独立运行而不是被import进
     __slots__ = ('name', 'age') # 用tuple定义允许绑定的属性名称
 </code></pre>
 <p>对子类不起作用，除非在子类中也定义<code>__slots__</code>，这样，子类实例允许定义的属性就是自身的<code>__slots__</code>加上父类的<code>__slots__</code>。</p>
+<p>但是当父类无<code>__slots__</code>，而子类有，则无效。</p>
+<h3 id="property">@property</h3>
+<p>实现类的时候，我们常常需要提供各种借口，但是为每个接口都写一个函数有些麻烦，使用也不方便，我们可以用<code>@property</code>，使得可以直接调用变量，用等号修改，且进行范围检查。</p>
+<pre><code class="language-python">class Student(object):
+    @property
+    def score(self):
+        return self.__score
+
+    @score.setter
+    def score(self, val):
+        if 0 &lt;= val and val &lt;= 100:
+            self.__score = val
+        else:
+            raise ValueError('Score Error')
+</code></pre>
+<p><code>@property</code>后定义的函数作为此名变量的getter方法；此时，<code>@property</code>本身又创造了另一个修饰器<code>@score.setter</code>，实现setter方法，如果没有setter方法，则变量为只读。</p>
+<h3 id="多重继承">多重继承</h3>
+<p>RT：</p>
+<pre><code class="language-python">class Dog(Mammal, Runnable):
+    pass
+</code></pre>
+<p>如果方法重复怎么办？优先保留顺序靠前的。</p>
+<h3 id="枚举类">枚举类</h3>
+<p>继承自Enum。<code>@unique</code>装饰器可以帮助我们检查保证没有重复值。</p>
+<h3 id="元类">元类</h3>
+<p>太 妙 了！豁然开朗！</p>
+<p><strong><a href="https://mozillazg.com/2016/12/python-super-is-not-as-simple-as-you-thought.html">super()</a></strong></p>
 ]]></content>
     </entry>
     <entry>
