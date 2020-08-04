@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://i207M.github.io/favicon.ico?v=1596444849975">
+<link rel="shortcut icon" href="https://i207M.github.io/favicon.ico?v=1596539698919">
 <link rel="stylesheet" href="https://i207M.github.io/styles/main.css">
 
 
@@ -38,7 +38,7 @@ set:{}
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://i207M.github.io">
-        <img src="https://i207M.github.io/images/avatar.png?v=1596444849975" class="site-logo">
+        <img src="https://i207M.github.io/images/avatar.png?v=1596539698919" class="site-logo">
         <h1 class="site-title">i207M&#39;s Fantastic Blog</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -682,6 +682,17 @@ h=hmac.new(key, message, digestmode='MD5')
 ...     print(c)
 # 迭代效果：'A' 'B' 'C' 'X' 'Y' 'Z'
 </code></pre>
+<h2 id="84">8.4</h2>
+<p>昨天属实有点摸鱼。今天把<code>urllib</code>这些事学了。</p>
+<p>强基快要出结果了.jpg</p>
+<p>学这个之前要先把JSON学了。</p>
+<h3 id="json">JSON</h3>
+<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2020/08/04/HPh7R5XcgVzAMpn.png" alt="image-20200804083520132" loading="lazy"></figure>
+<p>使用内置的<code>json</code>模块。</p>
+<p><code>json.dumps(arg)</code>返回<code>str</code>，内容是标准的JSON。<code>dump(arg,file)</code>可以直接把结果写入文件流中。</p>
+<p>反序列化使用<code>loads()/load()</code>。</p>
+<p>如果是自定义的Class如何序列化？</p>
+<p>可选参数<code>default</code>把任意一个对象变成一个可序列为JSON的对象。</p>
 
             </div>
             

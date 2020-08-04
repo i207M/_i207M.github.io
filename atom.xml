@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://i207M.github.io</id>
     <title>i207M&apos;s Fantastic Blog</title>
-    <updated>2020-08-03T08:54:28.788Z</updated>
+    <updated>2020-08-04T11:15:05.164Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://i207M.github.io"/>
     <link rel="self" href="https://i207M.github.io/atom.xml"/>
@@ -10,6 +10,17 @@
     <logo>https://i207M.github.io/images/avatar.png</logo>
     <icon>https://i207M.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, i207M&apos;s Fantastic Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[VS Code使用技巧]]></title>
+        <id>https://i207M.github.io/post/vs-code-shi-yong-ji-qiao/</id>
+        <link href="https://i207M.github.io/post/vs-code-shi-yong-ji-qiao/">
+        </link>
+        <updated>2020-08-04T11:13:42.000Z</updated>
+        <content type="html"><![CDATA[<p>8.4<br>
+今天有点摸，干脆学学VS Code里有没有我还不知道的小技巧。<br>
+<code>alt+shift+left/right</code>：Shrink/expand selection</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Python学习笔记]]></title>
         <id>https://i207M.github.io/post/python-xue-xi-bi-ji/</id>
@@ -594,6 +605,17 @@ h=hmac.new(key, message, digestmode='MD5')
 ...     print(c)
 # 迭代效果：'A' 'B' 'C' 'X' 'Y' 'Z'
 </code></pre>
+<h2 id="84">8.4</h2>
+<p>昨天属实有点摸鱼。今天把<code>urllib</code>这些事学了。</p>
+<p>强基快要出结果了.jpg</p>
+<p>学这个之前要先把JSON学了。</p>
+<h3 id="json">JSON</h3>
+<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2020/08/04/HPh7R5XcgVzAMpn.png" alt="image-20200804083520132" loading="lazy"></figure>
+<p>使用内置的<code>json</code>模块。</p>
+<p><code>json.dumps(arg)</code>返回<code>str</code>，内容是标准的JSON。<code>dump(arg,file)</code>可以直接把结果写入文件流中。</p>
+<p>反序列化使用<code>loads()/load()</code>。</p>
+<p>如果是自定义的Class如何序列化？</p>
+<p>可选参数<code>default</code>把任意一个对象变成一个可序列为JSON的对象。</p>
 ]]></content>
     </entry>
     <entry>
