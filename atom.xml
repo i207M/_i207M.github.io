@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://i207M.github.io</id>
     <title>i207M&apos;s Fantastic Blog</title>
-    <updated>2020-08-04T11:15:05.164Z</updated>
+    <updated>2020-08-09T01:24:38.292Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://i207M.github.io"/>
     <link rel="self" href="https://i207M.github.io/atom.xml"/>
@@ -11,14 +11,29 @@
     <icon>https://i207M.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, i207M&apos;s Fantastic Blog</rights>
     <entry>
+        <title type="html"><![CDATA[录取后小记]]></title>
+        <id>https://i207M.github.io/post/lu-qu-hou-xiao-ji/</id>
+        <link href="https://i207M.github.io/post/lu-qu-hou-xiao-ji/">
+        </link>
+        <updated>2020-08-06T13:46:46.000Z</updated>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[VS Code使用技巧]]></title>
         <id>https://i207M.github.io/post/vs-code-shi-yong-ji-qiao/</id>
         <link href="https://i207M.github.io/post/vs-code-shi-yong-ji-qiao/">
         </link>
         <updated>2020-08-04T11:13:42.000Z</updated>
-        <content type="html"><![CDATA[<p>8.4<br>
-今天有点摸，干脆学学VS Code里有没有我还不知道的小技巧。<br>
-<code>alt+shift+left/right</code>：Shrink/expand selection</p>
+        <content type="html"><![CDATA[<p><em>8.4：今天有点摸，干脆学学VS Code里有没有我还不知道的小技巧。</em></p>
+<p><code>alt+shift+left/right</code>：Shrink/expand selection</p>
+<p><code>F12</code>：跳转定义（按下<code>ctrl+p</code>后输入<code>@</code>可以浏览所有定义）</p>
+<p><code>alt+F12</code>：速览2定义</p>
+<p><code>F2</code>：重命名符号！！！</p>
+<p><code>alt+left</code>：回到先前的位置</p>
+<h3 id="重构">重构</h3>
+<p>https://code.visualstudio.com/docs/editor/refactoring</p>
+<p>https://code.visualstudio.com/docs/python/editing#_refactoring</p>
+<p>很好用的功能。</p>
+<p>可以批量重命名变量、将重复语句变成函数/变量。</p>
 ]]></content>
     </entry>
     <entry>
@@ -524,6 +539,7 @@ except Exception as e:
 <pre><code class="language-python">with open('/Users/michael/test.txt', 'w') as f:
     f.write('Hello, world!')
 </code></pre>
+<p>建议使用<code>with</code>语句，以防忘记<code>close</code>，如果不能直接使用<code>with</code>语句，可以</p>
 <h4 id="stringiobytesio">StringIO&amp;BytesIO</h4>
 <p>在内存中读写str。像文件一样写入即可。<code>from io import StringIO</code></p>
 <h4 id="os模块">os模块</h4>
@@ -616,6 +632,75 @@ h=hmac.new(key, message, digestmode='MD5')
 <p>反序列化使用<code>loads()/load()</code>。</p>
 <p>如果是自定义的Class如何序列化？</p>
 <p>可选参数<code>default</code>把任意一个对象变成一个可序列为JSON的对象。</p>
+<pre><code class="language-python">def student2dict(std):
+    return dict(
+        name=std.name,
+        age=std.age,
+        score=std.score,
+    )
+</code></pre>
+<p>有一个Trick方法：</p>
+<pre><code class="language-python">json.dumps(t, default=lambda obj: obj.__dict__)
+</code></pre>
+<p>同理可以反序列化。</p>
+<h3 id="urllib">urllib</h3>
+<p>基本上实现GET和POST就够了。</p>
+<h4 id="get">Get</h4>
+<p><code>request</code>模块可以发送一个GET到指定的页面。</p>
+<pre><code class="language-python">from urllib import request
+
+with request.urlopen('https://yesno.wtf/api') as f:
+    data = f.read()
+    print('Status:', f.status, f.reason)
+    for k, v in f.getheaders():
+        print('%s: %s' % (k, v))
+    data = data.decode('utf-8')
+    print('Data:', data)
+    js = json.loads(data)
+    print(js)
+    for it in js.items():
+        print('%s: %s' % it)
+</code></pre>
+<p>挺简单易懂的。如果使用<code>f.getheader(str)</code>，可以返回某个header.</p>
+<p><code>urlopen</code>函数除了直接传入网址，还可以传入<code>Request</code>类，实现自定义header，从而自定义UA等功能。</p>
+<pre><code class="language-python">req = request.Request('http://www.douban.com/')
+req.add_header('User-Agent', 'Mozilla/6.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/8.0 Mobile/10A5376e Safari/8536.25')
+</code></pre>
+<h4 id="post">POST</h4>
+<p>只需要把参数以bytes形式传入。可以借助<code>parse.urlencode</code>.</p>
+<p>模拟微博登录：</p>
+<pre><code class="language-python">from urllib import request, parse
+
+print('Login Weibo...')
+email = input('Email:')
+pwd = input('Password:')
+login_data = parse.urlencode(
+    [
+        ('username', email), ('password', pwd), ('entry', 'mweibo'), ('client_id', ''), ('savestate', '1'), ('ec', ''),
+        ('pagerefer', 'https://passport.weibo.cn/signin/welcome?entry=mweibo&amp;r=http%3A%2F%2Fm.weibo.cn%2F')
+    ]
+)
+
+req = request.Request('https://passport.weibo.cn/sso/login')
+req.add_header('Origin', 'https://passport.weibo.cn')
+req.add_header('User-Agent', 'Mozilla/6.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/8.0 Mobile/10A5376e Safari/8536.25')
+req.add_header('Referer', 'https://passport.weibo.cn/signin/login?entry=mweibo&amp;res=wel&amp;wm=3349&amp;r=http%3A%2F%2Fm.weibo.cn%2F')
+
+with request.urlopen(req, data=login_data.encode('utf-8')) as f:
+    print('Status:', f.status, f.reason)
+    for it in f.getheaders():
+        print('%s: %s' % it)
+    print('Data:', f.read().decode('utf-8'))
+</code></pre>
+<h4 id="handler">Handler</h4>
+<p>默认使用的代理是系统设置的，如果要更改，感觉urllib提供的实现很复杂，之后学习requsets或urllib2.</p>
+<pre><code class="language-python"># urllib
+proxy_handler = request.ProxyHandler({'http': 'http://127.0.0.1:2334', 'https': 'https://127.0.0.1:2334'})
+proxy_auth_handler = request.ProxyBasicAuthHandler()
+opener = request.build_opener(proxy_handler, proxy_auth_handler)
+with opener.open('https://www.google.com/') as f:
+    print('Status:', f.status, f.reason) # 200 OK
+</code></pre>
 ]]></content>
     </entry>
     <entry>
@@ -639,7 +724,8 @@ h=hmac.new(key, message, digestmode='MD5')
         </link>
         <updated>2020-07-19T10:59:52.000Z</updated>
         <content type="html"><![CDATA[<p>i207Ｍ曾经是一位OIer，拥有NOI2019银牌。<br>
-i207M毕业于SJZEZ。</p>
+i207M毕业于SJZEZ。<br>
+i207M进入清华大学-信息与计算科学系（强基计划）。</p>
 ]]></content>
     </entry>
     <entry>
