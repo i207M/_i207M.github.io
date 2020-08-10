@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://i207M.github.io</id>
     <title>i207M&apos;s Fantastic Blog</title>
-    <updated>2020-08-09T01:24:38.292Z</updated>
+    <updated>2020-08-10T07:40:33.874Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://i207M.github.io"/>
     <link rel="self" href="https://i207M.github.io/atom.xml"/>
@@ -10,6 +10,56 @@
     <logo>https://i207M.github.io/images/avatar.png</logo>
     <icon>https://i207M.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, i207M&apos;s Fantastic Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[Python爬虫探索]]></title>
+        <id>https://i207M.github.io/post/python-pa-chong-tan-suo/</id>
+        <link href="https://i207M.github.io/post/python-pa-chong-tan-suo/">
+        </link>
+        <updated>2020-08-09T01:41:49.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="百度翻译">百度翻译</h1>
+<h2 id="模仿"><a href="https://www.jianshu.com/p/4c3e228940c8">模仿</a></h2>
+<p>分析百度词典：</p>
+<ol>
+<li>打开F12，查看Network栏</li>
+<li>尝试输入单词girl，发现每敲一个字母后面都有请求</li>
+<li>请求地址是：<a href="https://links.jianshu.com/go?to=https%3A%2F%2Ffanyi.baidu.com%2Fsug">https://fanyi.baidu.com/sug</a></li>
+<li>请求方式：POST</li>
+<li>利用NetWork-All-Hearders查看，发现Form data的值是kw:girl，所以字典的key名为kw。</li>
+<li>查看返回内容格式，返回的是json格式内容，需要用到json包</li>
+</ol>
+<hr>
+<p>啊啊啊这几天太摸了！！！</p>
+<hr>
+<pre><code class="language-python">from urllib import request, parse, error
+import json
+
+baseURL = 'https://fanyi.baidu.com/sug'
+
+try:
+    word = input('INPUT:')
+    dat = parse.urlencode({&quot;kw&quot;: word}).encode()
+    with request.urlopen(baseURL, data=dat) as f:
+        # print('Status:', f.status, f.reason)
+        ret = f.read().decode()
+        ret = json.loads(ret)
+        # print(ret['data'])
+        ls = [a['k'] for a in ret['data']]
+        if word in ls:
+            print('%s: %s' % (word, ret['data'][0]['v']))
+            print('Similar expressions:')
+        else:
+            print('NOT FOUND. Did you mean:')
+        print(ls)
+except error.URLError as e:
+    print(e)
+# 爽！
+</code></pre>
+<h2 id="百度翻译api">百度翻译API</h2>
+<p>抓包发现返回的翻译内容来自https://fanyi.baidu.com/v2transapi?from=en&amp;to=zh</p>
+<p>Let's try!</p>
+<p>该死，竟然加密了...懒得搞了，看这个<a href="https://github.com/ZCY01/BaiduTranslate">接口</a>吧。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[录取后小记]]></title>
         <id>https://i207M.github.io/post/lu-qu-hou-xiao-ji/</id>
@@ -701,6 +751,8 @@ opener = request.build_opener(proxy_handler, proxy_auth_handler)
 with opener.open('https://www.google.com/') as f:
     print('Status:', f.status, f.reason) # 200 OK
 </code></pre>
+<h2 id="810">8.10</h2>
+<p><code>HTMLParser</code>：先鸽了。</p>
 ]]></content>
     </entry>
     <entry>
