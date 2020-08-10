@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://i207M.github.io</id>
     <title>i207M&apos;s Fantastic Blog</title>
-    <updated>2020-08-10T07:40:33.874Z</updated>
+    <updated>2020-08-10T08:35:39.093Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://i207M.github.io"/>
     <link rel="self" href="https://i207M.github.io/atom.xml"/>
@@ -753,6 +753,91 @@ with opener.open('https://www.google.com/') as f:
 </code></pre>
 <h2 id="810">8.10</h2>
 <p><code>HTMLParser</code>：先鸽了。</p>
+<h3 id="pil">PIL</h3>
+<p>Python Imaging Library</p>
+<pre><code class="language-python">from PIL import Image
+
+im = Image.open('t.png')
+w, h = im.size
+im.thumbnail((w // 4, h // 4)) # 缩放
+im.save('tt.jpg', 'jpeg')
+
+im2 = im.filter(ImageFilter.BLUR) # 模糊
+</code></pre>
+<h4 id="生成验证码">生成验证码</h4>
+<pre><code class="language-python">from PIL import Image, ImageDraw, ImageFont, ImageFilter
+import random
+
+
+def rndChar():
+    return chr(random.randint(65, 90))
+
+
+def rndColor():
+    return (random.randint(64, 255), random.randint(64, 255), random.randint(64, 255))
+
+
+def rndColor2():
+    return (random.randint(32, 127), random.randint(32, 127), random.randint(32, 127))
+
+
+h = 60
+w = h * 4
+
+im = Image.new('RGB', (w, h), (255, 255, 255)) # 创建。Modes除了RGB还有'1'(1-bit,black and white),'L'(8-bit,black and white)
+
+font = ImageFont.truetype('arial.ttf', 36) # 字体
+draw = ImageDraw.Draw(im)
+for x in range(w):
+    for y in range(h):
+        draw.point((x, y), fill=rndColor())
+
+for t in range(4):
+    draw.text((60 * t + 10, random.randint(1, 27)), rndChar(), font=font, fill=rndColor2())
+
+im = im.filter(ImageFilter.BLUR)
+im.save('code.jpg', 'jpeg')
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://i.loli.net/2020/08/10/24dZyRCYlbG1POB.jpg" alt="" loading="lazy"></figure>
+<p>加强过后（加入了字符旋转）：</p>
+<pre><code class="language-python">from PIL import Image, ImageDraw, ImageFont, ImageFilter
+import random
+
+
+def rndChar():
+    return chr(random.randint(65, 90))
+
+
+def rndColor():
+    return (random.randint(64, 255), random.randint(64, 255), random.randint(64, 255))
+
+
+def rndColor2():
+    return (random.randint(32, 127), random.randint(32, 127), random.randint(32, 127))
+
+
+h = 60
+w = h * 4
+
+im = Image.new('RGB', (w, h), (255, 255, 255))
+
+font = ImageFont.truetype('arial.ttf', 40)
+dr = ImageDraw.Draw(im)
+for x in range(w):
+    for y in range(h):
+        dr.point((x, y), fill=rndColor())
+for t in range(4):
+    text_layer = Image.new('RGBA', (40, 40))
+    text_draw = ImageDraw.Draw(text_layer)
+    text_draw.text((0, 0), rndChar(), font=font, fill=(*rndColor2(), 255))
+    text_layer = text_layer.rotate(random.randint(0, 360))
+    im.paste(text_layer, (60 * t, random.randint(0, 20)), text_layer)
+
+im = im.filter(ImageFilter.BLUR)
+im.save('code.jpg', 'jpeg')
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://i.loli.net/2020/08/10/o1c93qCtTzPfi4g.jpg" alt="" loading="lazy"></figure>
+<p>爽！PythonNB！</p>
 ]]></content>
     </entry>
     <entry>
