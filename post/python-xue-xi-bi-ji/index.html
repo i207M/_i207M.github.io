@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://i207M.github.io/favicon.ico?v=1597048499464">
+<link rel="shortcut icon" href="https://i207M.github.io/favicon.ico?v=1597134112096">
 <link rel="stylesheet" href="https://i207M.github.io/styles/main.css">
 
 
@@ -38,7 +38,7 @@ set:{}
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://i207M.github.io">
-        <img src="https://i207M.github.io/images/avatar.png?v=1597048499464" class="site-logo">
+        <img src="https://i207M.github.io/images/avatar.png?v=1597134112096" class="site-logo">
         <h1 class="site-title">i207M&#39;s Fantastic Blog</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -802,10 +802,10 @@ font = ImageFont.truetype('arial.ttf', 36) # 字体
 draw = ImageDraw.Draw(im)
 for x in range(w):
     for y in range(h):
-        draw.point((x, y), fill=rndColor())
+        draw.point((x, y), fill=rndColor()) # 画背景
 
 for t in range(4):
-    draw.text((60 * t + 10, random.randint(1, 27)), rndChar(), font=font, fill=rndColor2())
+    draw.text((60 * t + 10, random.randint(1, 27)), rndChar(), font=font, fill=rndColor2()) # 写字母
 
 im = im.filter(ImageFilter.BLUR)
 im.save('code.jpg', 'jpeg')
@@ -839,17 +839,49 @@ for x in range(w):
     for y in range(h):
         dr.point((x, y), fill=rndColor())
 for t in range(4):
-    text_layer = Image.new('RGBA', (40, 40))
+    text_layer = Image.new('RGBA', (40, 40)) # 注意是RGBA，A表示透明度
     text_draw = ImageDraw.Draw(text_layer)
     text_draw.text((0, 0), rndChar(), font=font, fill=(*rndColor2(), 255))
-    text_layer = text_layer.rotate(random.randint(0, 360))
-    im.paste(text_layer, (60 * t, random.randint(0, 20)), text_layer)
+    text_layer = text_layer.rotate(random.randint(0, 360)) # 旋转
+    im.paste(text_layer, (60 * t, random.randint(0, 20)), text_layer) # 粘贴
 
 im = im.filter(ImageFilter.BLUR)
 im.save('code.jpg', 'jpeg')
 </code></pre>
 <figure data-type="image" tabindex="3"><img src="https://i.loli.net/2020/08/10/o1c93qCtTzPfi4g.jpg" alt="" loading="lazy"></figure>
 <p>爽！PythonNB！</p>
+<h3 id="requests">requests</h3>
+<p>比urllib更强悍。</p>
+<pre><code class="language-python">r = requests.get('URL')
+r.status_code
+r.text # 内容（自动检测编码）
+r.content # bytes对象
+</code></pre>
+<p>对于带参数的URL，传入dict作为<code>params</code>参数。</p>
+<p><code>headers</code>参数可以传入dict。</p>
+<p><em>另外一提，使用http访问百度搜索不需要UA，使用https就必须UA。</em></p>
+<p>要发送POST，只需要把方法变成<code>post()</code>，然后用<code>data</code>参数作为POST请求的数据。默认使用<code>application/x-www-form-urlencoded</code>对POST数据编码。如果要传递JSON，可以传入json参数。</p>
+<p><a href="https://blog.csdn.net/xiao__jia__jia/article/details/79357274">四种常见的 POST 提交数据方式</a></p>
+<p><em>重写百度翻译爬虫ing</em></p>
+<p>上传文件可以使用<code>files</code>参数，读取文件时，必须使用<code>'rb'</code>模式，这样获取的<code>bytes</code>长度才是文件的长度。</p>
+<pre><code class="language-python">upfile = {'file': open('name','rb')}
+r = requests.post(url, files=upfile)
+</code></pre>
+<p>requests对Cookie做了处理，使我们不必解析Cookie就可以直接获取指定的Cookie。</p>
+<pre><code class="language-python">print(r.cookies['token'])
+</code></pre>
+<p>要传入cookie，只需将dict传入<code>cookies</code>参数。</p>
+<p>要指定超时，传入以秒为单位的timeout参数。</p>
+<h3 id="chardet">chardet</h3>
+<p>对于未知编码的<code>bytes</code>，转换成<code>str</code>需要“猜测”编码，<code>chardet</code>这个第三方库通过收集编码的特征字符，有很大概率猜对。</p>
+<pre><code class="language-python">&gt;&gt;&gt; data = '离离原上草，一岁一枯荣'.encode('gbk')
+&gt;&gt;&gt; chardet.detect(data)
+{'encoding': 'GB2312', 'confidence': 0.7407407407407407, 'language': 'Chinese'}
+</code></pre>
+<p><code>confidence</code>是概率。</p>
+<h3 id="psutil">psutil</h3>
+<p>psutil = process and system utilities</p>
+<p>获取系统信息，先鸽了。</p>
 
             </div>
             
