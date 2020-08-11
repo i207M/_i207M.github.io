@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://i207M.github.io</id>
     <title>i207M&apos;s Fantastic Blog</title>
-    <updated>2020-08-11T08:22:05.220Z</updated>
+    <updated>2020-08-11T08:28:50.279Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://i207M.github.io"/>
     <link rel="self" href="https://i207M.github.io/atom.xml"/>
@@ -10,6 +10,15 @@
     <logo>https://i207M.github.io/images/avatar.png</logo>
     <icon>https://i207M.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, i207M&apos;s Fantastic Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[Python学习笔记-图形界面]]></title>
+        <id>https://i207M.github.io/post/python-xue-xi-bi-ji-tu-xing-jie-mian/</id>
+        <link href="https://i207M.github.io/post/python-xue-xi-bi-ji-tu-xing-jie-mian/">
+        </link>
+        <updated>2020-08-11T08:22:13.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="tkinter">Tkinter</h1>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Python爬虫探索]]></title>
         <id>https://i207M.github.io/post/python-pa-chong-tan-suo/</id>
