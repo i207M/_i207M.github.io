@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://i207M.github.io</id>
     <title>i207M&apos;s Fantastic Blog</title>
-    <updated>2020-08-11T08:28:50.279Z</updated>
+    <updated>2020-08-12T01:26:03.700Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://i207M.github.io"/>
     <link rel="self" href="https://i207M.github.io/atom.xml"/>
@@ -16,7 +16,39 @@
         <link href="https://i207M.github.io/post/python-xue-xi-bi-ji-tu-xing-jie-mian/">
         </link>
         <updated>2020-08-11T08:22:13.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="tkinter">Tkinter</h1>
+        <content type="html"><![CDATA[<p>python支持多种图形界面的第三方库，包括：Tk,Qt,GTK等。python自带的是支持Tk的Tkinter。</p>
+<h1 id="turtle">turtle</h1>
+<p>好可爱的绘图库...</p>
+<pre><code class="language-python">width(4)
+pencolor('red')
+forward(200)
+right(90)
+</code></pre>
+<h1 id="tkinter">Tkinter</h1>
+<p>廖雪峰的博客讲的不清楚啊...</p>
+<p>抄的代码：</p>
+<pre><code class="language-python">from tkinter import *
+
+
+class Application(Frame):
+    def __init__(self, master=None):
+        Frame.__init__(self, master)
+        self.pack()
+        self.createWidgets()
+
+    def createWidgets(self):
+        self.helloLable = Label(self, text='Hello, world!')
+        self.helloLable.pack()
+        self.quitButton = Button(self, text='Quit', command=self.quit)
+        self.quitButton.pack()
+
+
+app = Application()
+app.master.title('Hello, world')
+app.mainloop()
+
+</code></pre>
+<p>将来学<a href="https://www.cnblogs.com/shwee/p/9427975.html">这个</a>吧。</p>
 ]]></content>
     </entry>
     <entry>
@@ -466,7 +498,7 @@ if __name__ == '__main__': # 当且仅当它是独立运行而不是被import进
 <p>如果要让内部属性不被外部访问，可以把属性的名称前加上两个下划线<code>__</code>，这样在外部就真的无法访问。但是在外部定义class的<code>__</code>开头的变量是可以被访问的。</p>
 <p>在Python中，变量名类似<code>__xxx__</code>的，也就是以双下划线开头，并且以双下划线结尾的，是特殊变量，特殊变量是可以直接访问的，不是private变量，所以，不能用<code>__name__</code>、<code>__score__</code>这样的变量名。</p>
 <p>有些时候，你会看到以一个下划线开头的实例变量名，比如<code>_name</code>，这样的实例变量外部是可以访问的，但是，按照约定俗成的规定，当你看到这样的变量时，意思就是，“虽然我可以被访问，但是，请把我视为私有变量，不要随意访问”。</p>
-<p>这就是著名的**“开闭”原则**：</p>
+<p>这就是著名的**开闭原则 **：</p>
 <p>对扩展开放：允许新增<code>Animal</code>子类；</p>
 <p>对修改封闭：不需要修改依赖<code>Animal</code>类型的<code>run_twice()</code>等函数。</p>
 <p><em>“鸭子类型”：它并不要求严格的继承体系，一个对象只要“看起来像鸭子，走起路来像鸭子”，那它就可以被看做是鸭子。</em></p>
@@ -589,7 +621,7 @@ if __name__ == '__main__': # 当且仅当它是独立运行而不是被import进
 <h3 id="元类">元类</h3>
 <p><a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017592449371072">太 妙 了！豁然开朗！</a>（用到时再复习吧）</p>
 <p><strong><a href="https://mozillazg.com/2016/12/python-super-is-not-as-simple-as-you-thought.html">super()</a></strong></p>
-<h2 id="202083">2020.8.3</h2>
+<h2 id="83">8.3</h2>
 <h3 id="错误处理">错误处理</h3>
 <p>感觉这个挺重要的。</p>
 <pre><code class="language-python">try:
@@ -721,7 +753,7 @@ h=hmac.new(key, message, digestmode='MD5')
 <p>同理可以反序列化。</p>
 <h3 id="urllib">urllib</h3>
 <p>基本上实现GET和POST就够了。</p>
-<h4 id="get">Get</h4>
+<h4 id="get">GET</h4>
 <p><code>request</code>模块可以发送一个GET到指定的页面。</p>
 <pre><code class="language-python">from urllib import request
 
@@ -881,11 +913,11 @@ r.content # bytes对象
 <pre><code class="language-python">upfile = {'file': open('name','rb')}
 r = requests.post(url, files=upfile)
 </code></pre>
-<p>requests对Cookie做了处理，使我们不必解析Cookie就可以直接获取指定的Cookie。</p>
+<p>requests对cookie做了处理，使我们不必解析cookie就可以直接获取指定的cookie。</p>
 <pre><code class="language-python">print(r.cookies['token'])
 </code></pre>
 <p>要传入cookie，只需将dict传入<code>cookies</code>参数。</p>
-<p>要指定超时，传入以秒为单位的timeout参数。</p>
+<p>要指定超时，传入以秒为单位的<code>timeout</code>参数。</p>
 <h3 id="chardet">chardet</h3>
 <p>对于未知编码的<code>bytes</code>，转换成<code>str</code>需要“猜测”编码，<code>chardet</code>这个第三方库通过收集编码的特征字符，有很大概率猜对。</p>
 <pre><code class="language-python">&gt;&gt;&gt; data = '离离原上草，一岁一枯荣'.encode('gbk')
