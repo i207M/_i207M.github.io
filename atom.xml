@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://i207M.github.io</id>
     <title>i207M&apos;s Fantastic Blog</title>
-    <updated>2020-08-12T01:26:03.700Z</updated>
+    <updated>2020-08-13T06:07:36.322Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://i207M.github.io"/>
     <link rel="self" href="https://i207M.github.io/atom.xml"/>
@@ -10,6 +10,102 @@
     <logo>https://i207M.github.io/images/avatar.png</logo>
     <icon>https://i207M.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, i207M&apos;s Fantastic Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[正则表达式-学习笔记]]></title>
+        <id>https://i207M.github.io/post/zheng-ze-biao-da-shi-xue-xi-bi-ji/</id>
+        <link href="https://i207M.github.io/post/zheng-ze-biao-da-shi-xue-xi-bi-ji/">
+        </link>
+        <updated>2020-08-13T06:06:34.000Z</updated>
+        <content type="html"><![CDATA[<p>t</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Python学习笔记-网络编程]]></title>
+        <id>https://i207M.github.io/post/python-wang-luo-bian-cheng/</id>
+        <link href="https://i207M.github.io/post/python-wang-luo-bian-cheng/">
+        </link>
+        <updated>2020-08-12T01:50:43.000Z</updated>
+        <content type="html"><![CDATA[<p>学会urllib和requests之后，再来学学底层的TCP协议（UDP鸽了）。</p>
+<h1 id="客户端">客户端</h1>
+<pre><code class="language-python">import socket
+
+s = socket.socket() # 创建socket
+s.connect(('www.baidu.com', 80))
+
+s.send(b'GET / HTTP/1.1\r\nHost: www.baidu.com\r\nConnection: close\r\n\r\n')
+
+buffer = []
+while True:
+    d = s.recv(1024) # 取出1024字节
+    if d:
+        buffer.append(d)
+    else:
+        break
+
+s.close() # 关闭socket
+
+data = b''.join(buffer)
+header, html = data.split(b'\r\n\r\n', 1)
+print(header.decode())
+with open('t.html', 'wb') as f: # 保存
+    f.write(html)
+</code></pre>
+<p><code>socket.socket(socket.AF_INET, socket.SOCK_STREAM)</code>，其中<code>AF_INET</code>指定使用IPv4协议，<code>AF_INET6</code>表示IPv6。<code>SOCK_STREAM</code>指定使用面向流的TCP协议。如无特殊情况可以留空。</p>
+<p>使用HTTPS：</p>
+<pre><code class="language-python">import ssl
+
+s = ssl.wrap_socket(socket.socket())
+s.connect(('www.baidu.com', 443))
+</code></pre>
+<h1 id="服务端">服务端</h1>
+<p>服务端需要打开特定端口监听。一个Socket依赖4项：服务器地址、服务器端口、客户端地址、客户端端口。但是服务器还需要同时相应多个客户端的请求，所以每个连接都需要一个新的进程或线程来处理。</p>
+<p>简单的例子，接收客户端连接，把客户端发送的字符串加上<code>Hello</code>再发回去：</p>
+<p><strong>服务端</strong>：</p>
+<pre><code class="language-python">import socket
+import threading
+import time
+
+s = socket.socket()
+s.bind(('127.0.0.1', 6666)) # 绑定端口
+s.listen(5) # 此socket最多同时与
+print('Waiting for connection...')
+
+
+def tcplink(sock, addr):
+    print('Accept new connection from %s:%s' % addr)
+    sock.send(b'Welcome!')
+    while True:
+        data = sock.recv(1024) # 读取
+        time.sleep(1)
+        if not data or data.decode() == 'exit':
+            break
+        sock.send((b'Hello, %s!' % data.decode()).encode())
+    sock.close()
+    print('Connection for %s:%s closed' % addr)
+
+
+while True:
+    sock, addr = s.accept()
+    t = threading.Thread(target=tcplink, args=(sock, addr)) # 新建进程
+    t.start()
+</code></pre>
+<p>客户端：</p>
+<pre><code class="language-python">import socket
+import random
+
+s = socket.socket()
+s.connect(('127.0.0.1', 6666))
+
+print(s.recv(1024).decode())
+for i in range(5):
+    name = chr(random.randint(65, 90))
+    s.send(name.encode())
+    print(s.recv(1024).decode())
+s.send(b'exit')
+s.close()
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Python学习笔记-图形界面]]></title>
         <id>https://i207M.github.io/post/python-xue-xi-bi-ji-tu-xing-jie-mian/</id>
@@ -19,8 +115,8 @@
         <content type="html"><![CDATA[<p>python支持多种图形界面的第三方库，包括：Tk,Qt,GTK等。python自带的是支持Tk的Tkinter。</p>
 <h1 id="turtle">turtle</h1>
 <p>好可爱的绘图库...</p>
-<pre><code class="language-python">width(4)
-pencolor('red')
+<pre><code class="language-python">width(5) # 设置笔刷宽度
+pencolor('red') # 设置颜色
 forward(200)
 right(90)
 </code></pre>
@@ -52,7 +148,7 @@ app.mainloop()
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Python爬虫探索]]></title>
+        <title type="html"><![CDATA[Python学习笔记-爬虫探索]]></title>
         <id>https://i207M.github.io/post/python-pa-chong-tan-suo/</id>
         <link href="https://i207M.github.io/post/python-pa-chong-tan-suo/">
         </link>
@@ -402,6 +498,9 @@ def createCounter():
 
     return counter
 </code></pre>
+<h3 id="globalnonlocal">global&amp;nonlocal</h3>
+<p>global用于修改全局变量；</p>
+<p>nonlocal用于在函数或其他作用域中使用外层(非全局)变量。</p>
 <h3 id="匿名函数">匿名函数</h3>
 <p>关键字<code>lambda</code>表示匿名函数，冒号前面的<code>x</code>表示函数参数，冒号后面的表达式是返回值。</p>
 <h3 id="装饰器">装饰器</h3>
