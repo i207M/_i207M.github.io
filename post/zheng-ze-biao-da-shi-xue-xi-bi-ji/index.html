@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://i207M.github.io/favicon.ico?v=1597298816001">
+<link rel="shortcut icon" href="https://i207M.github.io/favicon.ico?v=1597308108628">
 <link rel="stylesheet" href="https://i207M.github.io/styles/main.css">
 
 
@@ -24,8 +24,17 @@
 
 
 
-    <meta name="description" content="t
-" />
+    <meta name="description" content="From 洛谷日报
+正则表达式（Regular Expression, 简写为regex）
+选择
+|：选择（最低优先级）。
+数量限定
++：前面的字符至少出现一次；
+?：最多出现一次；
+*：出现任意次（包括0次）。
+括号
+定义范围和优先度。
+..." />
     <meta name="keywords" content="Note" />
   </head>
   <body>
@@ -35,7 +44,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://i207M.github.io">
-        <img src="https://i207M.github.io/images/avatar.png?v=1597298816001" class="site-logo">
+        <img src="https://i207M.github.io/images/avatar.png?v=1597308108628" class="site-logo">
         <h1 class="site-title">i207M&#39;s Fantastic Blog</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -101,7 +110,126 @@
             <div class="post-date">2020-08-13</div>
             
             <div class="post-content" v-pre>
-              <p>t</p>
+              <p>From <a href="https://www.luogu.com.cn/blog/0AND1STORY/zheng-ze-biao-da-shi">洛谷日报</a></p>
+<p>正则表达式（Regular Expression, 简写为regex）</p>
+<h3 id="选择">选择</h3>
+<p><code>|</code>：选择（最低优先级）。</p>
+<h3 id="数量限定">数量限定</h3>
+<p><code>+</code>：前面的字符至少出现一次；</p>
+<p><code>?</code>：最多出现一次；</p>
+<p><code>*</code>：出现任意次（包括0次）。</p>
+<h3 id="括号">括号</h3>
+<p>定义范围和优先度。</p>
+<h2 id="pcre表达式">PCRE表达式</h2>
+<p><code>^</code>：匹配输入字符串的开始位置。</p>
+<p><code>$</code>：匹配输入字符串的结束位置。</p>
+<p><code>{n}</code>：匹配确定的n次。</p>
+<p><code>{n,}</code>：至少匹配n次。</p>
+<p><code>{n,m}</code>：最少n次最多m次。</p>
+<p><code>?</code>：非贪心量化：当该字符在任何其他重复修饰符（<code>*,+,?</code>，<code>{n}</code>，<code>{n,}</code>，<code>{n,m}</code>）后面时，匹配模式是非贪婪的（默认为贪婪）。例如，对于字符串&quot;<code>oooo</code>&quot;，&quot;<code>o+?</code>&quot;将匹配单个&quot;<code>o</code>&quot;，而&quot;<code>o+</code>&quot;将匹配所有&quot;<code>o</code>&quot;。</p>
+<p><code>.</code>：匹配除<code>\r,\n</code>之外任何单个字符。</p>
+<p><code>(?:pattern)</code>：难以叙述...例如：<code>industr(?:y|ies)</code>等价于<code>industry|industries</code>。也就是说，如果pattern没匹配上，那么前面的字符也不匹配。</p>
+<p><code>(?=pattern)</code>：正向肯定预查。<code>Windows(?=95|98|NT|2000)</code>能匹配<code>Windows2000</code>中的<code>Windows</code>，但不能匹配<code>Windows3.1</code>中的<code>Windows</code>。预查不消耗字符。</p>
+<p><code>(?!pattern)</code>：正向否定预查。</p>
+<p><code>(?&lt;=pattern)</code>：反向肯定预查。<code>(?&lt;=95|98|NT|2000)Windows</code>能匹配<code>2000Windows</code>中的<code>Windows</code>，但不能匹配<code>3.1Windows</code>中的<code>Windows</code>。</p>
+<p><code>(?&lt;!pattern)</code>：反向否定预查。</p>
+<p><code>[xyz]</code>：匹配所包含的任意一个字符。（<code>[^xyz]</code>反之）</p>
+<p><code>[x-z]</code>：匹配范围内的任意一个字符。（<code>[^x-z]</code>反之）</p>
+<p><code>\b</code>：匹配一个单词边界。</p>
+<p><code>\B</code>：匹配一个非单词边界。</p>
+<p><code>\d</code>：匹配一个数字。（<code>\D</code>反之）</p>
+<p><code>\s</code>：匹配一个空白字符。</p>
+<p><code>\w</code>：匹配任何<strong>单词字符</strong>(即<em>字母、数字、下划线</em>)。</p>
+<h3 id="posix字符组">POSIX字符组</h3>
+<p><code>[:alnum:]</code></p>
+<p><code>[:alpha:]</code></p>
+<p><code>[:ascii:]</code></p>
+<p><code>[:lower:]</code></p>
+<p><code>[:upper:]</code></p>
+<h2 id="优先级">优先级</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">优先权</th>
+<th style="text-align:center">符号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">最高</td>
+<td style="text-align:center"><code>\</code></td>
+</tr>
+<tr>
+<td style="text-align:center">高</td>
+<td style="text-align:center"><code>()</code>、<code>(?:)</code>、<code>(?=)</code>、<code>[]</code></td>
+</tr>
+<tr>
+<td style="text-align:center">中</td>
+<td style="text-align:center"><code>*</code>、<code>+</code>、<code>?</code>、<code>{n}</code>、<code>{n,}</code>、<code>{n,m}</code></td>
+</tr>
+<tr>
+<td style="text-align:center">低</td>
+<td style="text-align:center"><code>^</code>、<code>$</code>、中介字符</td>
+</tr>
+<tr>
+<td style="text-align:center">次最低</td>
+<td style="text-align:center">串接，即相邻字符连接在一起</td>
+</tr>
+<tr>
+<td style="text-align:center">最低</td>
+<td style="text-align:center"><code>|</code></td>
+</tr>
+</tbody>
+</table>
+<h1 id="python应用">Python应用</h1>
+<p>使用<code>re</code>库。</p>
+<p><code>re.match(r'^\d{3}\-\d{3,8}$', '010-12345')</code>，建议使用r前缀避免考虑Python的转义问题（正则的转义，如<code>\-</code>仍然要考虑）。<strong><code>re.match</code>尝试从起始位置匹配一个模式。</strong></p>
+<p>匹配成功返回一个<code>Match</code>对象，否则返回<code>None</code>。</p>
+<p><code>re.search()</code>扫描整个字符串并返回第一个成功的匹配。</p>
+<p><code>findall()</code>返回一个list，内容是所有匹配的子串（str）。</p>
+<p><code>Match</code>对象的方法：</p>
+<ul>
+<li><code>start()</code>返回匹配开始的位置</li>
+<li><code>end()</code></li>
+<li><code>span()</code>返回<code>(start(),end())</code></li>
+</ul>
+<h4 id="匹配邮件地址">匹配邮件地址</h4>
+<p><code>re.match(r'^\w+(\w+|\.\w+)+@\w+(\w+|\.\w+)+$', addr)</code></p>
+<h3 id="切分字符串">切分字符串</h3>
+<p><code>'a b c'.split(' ')</code>无法识别连续的空格。</p>
+<p><code>re.split(r'\s+','a b c')</code>可以。</p>
+<h3 id="分组">分组</h3>
+<p>用<code>()</code>表示要提取的分组。例如<code>^(\d{3})-(\d{3,8})$</code>定义了两个组。使用<code>group()</code>方法取出：</p>
+<pre><code class="language-python">&gt;&gt;&gt; m = re.match(r'^(\d{3})-(\d{3,8})$', '010-12345')
+&gt;&gt;&gt; m
+&lt;_sre.SRE_Match object; span=(0, 9), match='010-12345'&gt;
+&gt;&gt;&gt; m.group(0) # 原串
+'010-12345'
+&gt;&gt;&gt; m.group(1)
+'010'
+&gt;&gt;&gt; m.group(2)
+'12345'
+</code></pre>
+<h4 id="命名分组">命名分组</h4>
+<p><code>(?P&lt;name&gt;regex)</code>，调用：<code>matchobj.group(name)</code></p>
+<h3 id="编译">编译</h3>
+<p>每次使用正则表达式都需要编译，如果多次使用可以预编译：</p>
+<pre><code class="language-python">import re
+# 编译
+re_telephone = re.compile(r'^(\d{3})-(\d{3,8})$')
+
+&gt;&gt;&gt; re_telephone.match('010-12345').groups()
+('010', '12345')
+</code></pre>
+<h3 id="替换">替换</h3>
+<p><code>re.sub(pattern,repl,string)</code></p>
+<p><code>repl</code>是替换后的字符串，也可以是一个函数：这个函数传入的参数为<code>Match</code>对象。</p>
+<p>假如文本有个单纯重复了 2 次，利用正则保留一个输出:</p>
+<pre><code class="language-python">import re
+x='this is is ok ok'
+y= re.sub(r'(\w+)\s\1',r'\1',x)
+print(y) # this is ok
+</code></pre>
 
             </div>
             
