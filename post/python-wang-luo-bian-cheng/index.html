@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://i207M.github.io/favicon.ico?v=1599032791066">
+<link rel="shortcut icon" href="https://i207M.github.io/favicon.ico?v=1599665586585">
 <link rel="stylesheet" href="https://i207M.github.io/styles/main.css">
 
 
@@ -39,7 +39,7 @@ s.connect(('www.baidu.com', 8..." />
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://i207M.github.io">
-        <img src="https://i207M.github.io/images/avatar.png?v=1599032791066" class="site-logo">
+        <img src="https://i207M.github.io/images/avatar.png?v=1599665586585" class="site-logo">
         <h1 class="site-title">i207M&#39;s Fantastic Blog</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -184,6 +184,9 @@ for i in range(5):
 s.send(b'exit')
 s.close()
 </code></pre>
+<h2 id="socketserver库">socketserver库</h2>
+<p>可以创建<code>TCPServer,UDPServer</code>。方法是定义一个特殊的处理类，继承自<code>BaseRequestHandler</code>，需要实现一个<code>handle()</code>方法。可以调用的变量例如<code>self.client_address,self.server,self.request</code>（对于<code>TCPServer</code>，可以调用<code>self.request.recv/sendall()</code>；对于<code>UDPServer</code>，它是一个<code>tuple(data,socket)</code>）.为实现方便，可以继承自<code>StreamRequestHandler</code></p>
+<p>实例：返回大写的输入内容</p>
 
             </div>
             

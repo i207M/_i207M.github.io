@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://i207M.github.io</id>
     <title>i207M&apos;s Fantastic Blog</title>
-    <updated>2020-09-02T07:47:02.207Z</updated>
+    <updated>2020-09-09T15:33:08.929Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://i207M.github.io"/>
     <link rel="self" href="https://i207M.github.io/atom.xml"/>
@@ -10,21 +10,6 @@
     <logo>https://i207M.github.io/images/avatar.png</logo>
     <icon>https://i207M.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, i207M&apos;s Fantastic Blog</rights>
-    <entry>
-        <title type="html"><![CDATA[日记]]></title>
-        <id>https://i207M.github.io/post/ri-ji/</id>
-        <link href="https://i207M.github.io/post/ri-ji/">
-        </link>
-        <updated>2020-08-18T03:25:00.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="818">8.18</h2>
-<p>果然是退役选手...忘了埃氏筛的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo>(</mo><mi>n</mi><mi>log</mi><mo>⁡</mo><mi>log</mi><mo>⁡</mo><mi>n</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">O(n\log \log n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span>的写法了。</p>
-<h2 id="820">8.20</h2>
-<p>尝试修改码风为大括号换行...</p>
-<h2 id="821">8.21</h2>
-<p>啊聊了会儿天...感慨颇多。</p>
-<p>大家的录取结果也都出来了。</p>
-]]></content>
-    </entry>
     <entry>
         <title type="html"><![CDATA[正则表达式-学习笔记]]></title>
         <id>https://i207M.github.io/post/zheng-ze-biao-da-shi-xue-xi-bi-ji/</id>
@@ -238,6 +223,9 @@ for i in range(5):
 s.send(b'exit')
 s.close()
 </code></pre>
+<h2 id="socketserver库">socketserver库</h2>
+<p>可以创建<code>TCPServer,UDPServer</code>。方法是定义一个特殊的处理类，继承自<code>BaseRequestHandler</code>，需要实现一个<code>handle()</code>方法。可以调用的变量例如<code>self.client_address,self.server,self.request</code>（对于<code>TCPServer</code>，可以调用<code>self.request.recv/sendall()</code>；对于<code>UDPServer</code>，它是一个<code>tuple(data,socket)</code>）.为实现方便，可以继承自<code>StreamRequestHandler</code></p>
+<p>实例：返回大写的输入内容</p>
 ]]></content>
     </entry>
     <entry>
@@ -1295,6 +1283,38 @@ print((1 and [a] or [b])[0], (0 and [a] or [b])[0])
         <content type="html"><![CDATA[<p>i207Ｍ曾经是一位OIer，拥有NOI2019银牌。<br>
 i207M毕业于SJZEZ。<br>
 i207M进入清华大学-信息与计算科学系（强基计划）。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Hello Gridea]]></title>
+        <id>https://i207M.github.io/post/hello-gridea/</id>
+        <link href="https://i207M.github.io/post/hello-gridea/">
+        </link>
+        <updated>2018-12-11T16:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+<!-- more -->
+<p><a href="https://github.com/getgridea/gridea">Github</a><br>
+<a href="https://gridea.dev/">Gridea 主页</a><br>
+<a href="http://fehey.com/">示例网站</a></p>
+<h2 id="特性">特性👇</h2>
+<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
+<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
+<p>🏷️  你可以对文章进行标签分组</p>
+<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
+<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
+<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
+<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
+<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
+<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
+<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
+<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
+<p>未来，它一定会成为你离不开的伙伴</p>
+<p>尽情发挥你的才华吧！</p>
+<p>😘 Enjoy~</p>
 ]]></content>
     </entry>
 </feed>
