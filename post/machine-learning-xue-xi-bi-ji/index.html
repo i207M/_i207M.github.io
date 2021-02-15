@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://i207M.github.io/favicon.ico?v=1603018238130">
+<link rel="shortcut icon" href="https://i207M.github.io/favicon.ico?v=1613357857610">
 <link rel="stylesheet" href="https://i207M.github.io/styles/main.css">
 
 
@@ -25,7 +25,11 @@
 
 
     <meta name="description" content="李宏毅老师好评！
-" />
+Pre
+优化方法：
+Stochastic Gradient Descent 随机梯度下降 Update for each example
+
+Normalize归一化：Make different features have..." />
     <meta name="keywords" content="Machine Learning" />
   </head>
   <body>
@@ -35,7 +39,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://i207M.github.io">
-        <img src="https://i207M.github.io/images/avatar.png?v=1603018238130" class="site-logo">
+        <img src="https://i207M.github.io/images/avatar.png?v=1613357857610" class="site-logo">
         <h1 class="site-title">i207M&#39;s Fantastic Blog</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -102,6 +106,76 @@
             
             <div class="post-content" v-pre>
               <p>李宏毅老师好评！</p>
+<h2 id="pre">Pre</h2>
+<p>优化方法：</p>
+<p>Stochastic Gradient Descent 随机梯度下降 Update for each example</p>
+<figure data-type="image" tabindex="1"><img src="https://i.loli.net/2020/10/18/GMJ4XyvPdWnSANV.png" alt="image-20201018190125562" loading="lazy"></figure>
+<p>Normalize归一化：Make different features have the same scaling.</p>
+<figure data-type="image" tabindex="2"><img src="https://i.loli.net/2020/10/19/41n9ztrLGYgIXHx.png" alt="image-20201019201617440" loading="lazy"></figure>
+<p>一次函数逼近</p>
+<figure data-type="image" tabindex="3"><img src="https://i.loli.net/2020/10/19/iNQYhJ1RctwIE6P.png" alt="image-20201019202326688" loading="lazy"></figure>
+<h2 id="optimization-for-deep-learning">Optimization for deep learning</h2>
+<p>SGDM(momentum)：累积之前的动量，避免SGD一遇到局部最小值就无法移动。</p>
+<figure data-type="image" tabindex="4"><img src="https://i.loli.net/2021/01/15/dRwhzvteaV479cS.png" alt="image-20210115200051628" loading="lazy"></figure>
+<p>Adagrad：防止前几步走的太大。或者走一大步走过头了。</p>
+<figure data-type="image" tabindex="5"><img src="https://i.loli.net/2021/01/15/pGjmd1YeF5OkQVM.png" alt="image-20210115200703729" loading="lazy"></figure>
+<p>RMSProp：和Adagrad很像。Adagrad无限累加，之后learning_rate会很小。于是换了计算方法。</p>
+<figure data-type="image" tabindex="6"><img src="https://i.loli.net/2021/01/15/R3tg7ebxHYNouvU.png" alt="image-20210115200219033" loading="lazy"></figure>
+<p>Adam：结合以上两种方法。</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>m</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">m_t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>加hat的原因：刚开始<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>m</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">m_t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>没有累积起来，比较小，除以<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mo>−</mo><msubsup><mi>β</mi><mn>1</mn><mi>t</mi></msubsup></mrow><annotation encoding="application/x-tex">1-\beta^t_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.041664em;vertical-align:-0.24810799999999997em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7935559999999999em;"><span style="top:-2.4518920000000004em;margin-left:-0.05278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24810799999999997em;"><span></span></span></span></span></span></span></span></span></span>来手动扩大。</p>
+<p>作者建议：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>β</mi><mn>1</mn></msub><mo>=</mo><mn>0.9</mn><mo separator="true">,</mo><msub><mi>β</mi><mn>2</mn></msub><mo>=</mo><mn>0.999</mn><mo separator="true">,</mo><mi>ϵ</mi><mo>=</mo><mn>1</mn><msup><mn>0</mn><mrow><mo>−</mo><mn>8</mn></mrow></msup></mrow><annotation encoding="application/x-tex">\beta_1=0.9,\beta_2=0.999,\epsilon=10^{-8}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord">0</span><span class="mord">.</span><span class="mord">9</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8388800000000001em;vertical-align:-0.19444em;"></span><span class="mord">0</span><span class="mord">.</span><span class="mord">9</span><span class="mord">9</span><span class="mord">9</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">ϵ</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">8</span></span></span></span></span></span></span></span></span></span></span></span></p>
+<figure data-type="image" tabindex="7"><img src="https://i.loli.net/2021/01/15/TCPsd7zb8XmhAFJ.png" alt="image-20210115194951618" loading="lazy"></figure>
+<figure data-type="image" tabindex="8"><img src="https://i.loli.net/2021/01/15/K3bevQXOpmynd9j.png" alt="image-20210115201820475" loading="lazy"></figure>
+<p>一个不太科学的结合方法：</p>
+<figure data-type="image" tabindex="9"><img src="https://i.loli.net/2021/01/15/DMosxnQWgJ2fBeK.png" alt="image-20210115202229439" loading="lazy"></figure>
+<p>找出问题</p>
+<p>把两种算法结合起来</p>
+<p>用一些没有道理的，自己勉强能够解释的，实际有效果的方法</p>
+<p>贪心等简单算法</p>
+<p>L2 Optimization时，最好只在更新<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>θ</mi></mrow><annotation encoding="application/x-tex">\theta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span></span></span></span>时考虑weight.</p>
+<figure data-type="image" tabindex="10"><img src="https://i.loli.net/2021/01/15/7uQ98WVigH6YFpG.png" alt="image-20210115225648614" loading="lazy"></figure>
+<figure data-type="image" tabindex="11"><img src="https://i.loli.net/2021/01/15/IXdmyxea9GRD1Z2.png" alt="image-20210115225815994" loading="lazy"></figure>
+<figure data-type="image" tabindex="12"><img src="https://i.loli.net/2021/01/15/CXhrGS5jPpdEH3v.png" alt="image-20210115230644446" loading="lazy"></figure>
+<figure data-type="image" tabindex="13"><img src="https://i.loli.net/2021/01/15/9kd1apO6JlVNx3e.png" alt="image-20210115230844749" loading="lazy"></figure>
+<h2 id="logistic-regression">Logistic Regression</h2>
+<p>Classification利用Bayes来做</p>
+<p>Sigmoid函数的来源是Bayes</p>
+<p>CrossEntropy交叉熵，就是最大化正确的概率</p>
+<figure data-type="image" tabindex="14"><img src="https://i.loli.net/2021/01/16/ONVZGEqCcFXkdxj.png" alt="image-20210116195703156" loading="lazy"></figure>
+<figure data-type="image" tabindex="15"><img src="https://i.loli.net/2021/01/16/RivsjpfWLkmynKF.png" alt="image-20210116102206715" loading="lazy"></figure>
+<h2 id="deep-learning">Deep Learning</h2>
+<p>激活函数：</p>
+<p>ReLU, Maxout</p>
+<figure data-type="image" tabindex="16"><img src="https://i.loli.net/2021/01/17/5uAjXqyv8c4sPwf.png" alt="image-20210117220234259" loading="lazy"></figure>
+<figure data-type="image" tabindex="17"><img src="https://i.loli.net/2021/01/17/jgRuKwd1cSsmnUO.png" alt="image-20210117221502753" loading="lazy"></figure>
+<figure data-type="image" tabindex="18"><img src="https://i.loli.net/2021/01/18/MNgZWbyHcjoeIa3.png" alt="image-20210118101119447" loading="lazy"></figure>
+<figure data-type="image" tabindex="19"><img src="https://i.loli.net/2021/01/18/8mlPjVit3aILYqJ.png" alt="image-20210118103352508" loading="lazy"></figure>
+<hr>
+<p>瞎想：能不能给图片加权重，以指出哪里是目标物体，以再次学习？</p>
+<p>研究者：我猜会遇到这种情况，我猜这种情况能够更好的处理，试了试确实变好了，但是这真的是最好的吗。</p>
+<p>ReLU局部是线性的，这好吗</p>
+<p>apex.amp</p>
+<p>torch.backends.cudnn.benchmark = true</p>
+<p>CNN不见得能够处理不同scale的物体</p>
+<p><em><strong>EP8,9,17 are very useful!</strong></em></p>
+<p>ELU,SELU,GELU</p>
+<h2 id="gnn">GNN</h2>
+<p>类似于Audio，有两个思想，即时域和频率上做NN.</p>
+<p>时域上，常用GAT</p>
+<p>频率上，常用GCN，C表示Convolution. 如何在图上卷积？我们将拉普拉斯矩阵（<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mo>=</mo><mi>D</mi><mo>−</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">L=D-A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">L</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span></span></span></span>）对角化<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mo>=</mo><msup><mi>U</mi><mi>T</mi></msup><mi mathvariant="normal">Λ</mi><mi>U</mi></mrow><annotation encoding="application/x-tex">L=U^T\Lambda U</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">L</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8413309999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span></span></span></span></span><span class="mord">Λ</span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span></span></span></span>，这时的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span></span></span></span>就类似于FFT中的范德蒙德矩阵。</p>
+<p>使用切比雪夫多项式优化<code>ChebNet</code>。免去每次都矩阵乘向量，只需要向量相减，省去一维复杂度。</p>
+<p>GCN实际上是把相邻节点的权值包括自己相加求平均再经过线性层和非线性层。</p>
+<p>GAT效果常比GCN好。</p>
+<h2 id="rnn">RNN</h2>
+<p>simpleRNN</p>
+<p>LSTM(Long Short-term Memory) 3 gates</p>
+<p>GRU(Gated Recurrent Unit) 2 gates</p>
+<hr>
+<p>Many to one: Sentiment Analysis, Key Term Extraction</p>
+<p>Many to Many: Speech Recognition, Machine Translation</p>
+<hr>
+<p>TODO:</p>
+<p>nn.train(),eval()</p>
 
             </div>
             

@@ -2,14 +2,50 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://i207M.github.io</id>
     <title>i207M&apos;s Fantastic Blog</title>
-    <updated>2020-10-18T10:56:33.495Z</updated>
+    <updated>2021-02-15T03:31:23.906Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://i207M.github.io"/>
     <link rel="self" href="https://i207M.github.io/atom.xml"/>
     <subtitle>Lover - 世界都是我</subtitle>
     <logo>https://i207M.github.io/images/avatar.png</logo>
     <icon>https://i207M.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, i207M&apos;s Fantastic Blog</rights>
+    <rights>All rights reserved 2021, i207M&apos;s Fantastic Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[萱]]></title>
+        <id>https://i207M.github.io/post/xuan/</id>
+        <link href="https://i207M.github.io/post/xuan/">
+        </link>
+        <updated>2021-01-20T07:32:52.000Z</updated>
+        <content type="html"><![CDATA[<p>1.18</p>
+<h1 id="礼物">礼物</h1>
+<p>见面 1.24</p>
+<ol>
+<li>7张贺卡</li>
+<li>钥匙链</li>
+<li>胸针 一路有你，离心最近</li>
+</ol>
+<p>除夕 2.11</p>
+<ol>
+<li>每日贺卡</li>
+<li><s>小羊公仔</s> 麋鹿</li>
+<li>小皮卡丘</li>
+</ol>
+<p>情人节 2.14</p>
+<ol>
+<li>每日贺卡</li>
+<li>纸玫瑰：折纸，涂胶</li>
+</ol>
+<p>一百天 4.28</p>
+<ol>
+<li>每日贺卡</li>
+</ol>
+<p>生日 7.3，166天</p>
+<ol>
+<li>每日贺卡</li>
+</ol>
+<p>手账本</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Pytorch学习笔记]]></title>
         <id>https://i207M.github.io/post/pytorch-xue-xi-bi-ji/</id>
@@ -17,6 +53,65 @@
         </link>
         <updated>2020-10-18T10:48:37.000Z</updated>
         <content type="html"><![CDATA[<p>首先学习Numpy的相关操作...</p>
+<p>似乎当时没有写下来...有时间再补吧</p>
+<hr>
+<h1 id="pytorch">Pytorch</h1>
+<pre><code class="language-python">import torch
+import numpy as np
+
+# 判断tensor
+print(torch.is_tensor([[1, 2], [3, 4]]))
+
+# 获得元素个数
+a = torch.tensor([1, 2])
+print(a.size())
+print(torch.numel(a))
+
+# build tensor
+a = torch.empty(2, 2, 2)  # 未初始化
+a = torch.zeros(2, 2, 2)
+a = torch.ones(2, 2, 2, dtype=torch.long)  # 可以指定数据类型
+a = torch.rand(2, 2, 2)  # 均匀分布
+a = torch.randn(2, 2, 2)  # 标准正态分布
+a = torch.randn_like(a, dtype=torch.double)  # 重载类型
+a = torch.eye(2)
+# 还可以创建正态分布的tensor
+
+# reshape (share memory)
+b = a.view(4)
+c = a.view(2, -1)
+
+# torch.tensor &lt;-&gt; numpy.array (share memory)
+np_arr = a.numpy()
+tc_tensor = torch.from_numpy(np_arr)
+
+# 特定构造
+a = torch.arange(1, 2, 0.2)  # 左闭右开以固定间隔选点(不常用，因为精度不够，请使用linspace)
+a = torch.linspace(0, 1, 100)  # 在[0,1]均匀选择100个点
+a = torch.logspace(-10, 10, 8)  # 在[10^start 10^end]上以对数刻度均匀选择steps个点
+
+# 拼接&amp;拆分
+a = a.view(2, 4)
+b = torch.cat((a, a, a), 0)  # 按行拼接
+b = torch.cat((a, a, a), 1)  # 按列拼接
+c = torch.split(b, (2, 4, 6), dim=1)  # 将dim=1拆成2,4,6大小的三部分
+
+# 转置
+a = a.t()
+
+# 保存
+torch.save(a, f='./t.pkl')
+a = torch.load(f='./t.pkl')
+
+# 运算
+# +
+# .add()
+# .add_()
+# torch.add(,,out=)
+
+</code></pre>
+<h2 id="autograd">autograd</h2>
+<p>创建一个张量并设置<code>requires_grad=True</code>用来追踪其计算历史</p>
 ]]></content>
     </entry>
     <entry>
@@ -1281,17 +1376,6 @@ print((1 and [a] or [b])[0], (0 and [a] or [b])[0])
 后来花了好长时间尝试点灯（就是运行Blink实例），怎么样都不能成功，后来发现ESP-01S才有灯，我手里这个没有...<br>
 后来又花了好长时间尝试Advanced Webserver这个示例，同样是一直无解，甚至都以为自己不小心刷坏了WiFi模块...直到把这个问题给小黄鸭（家父）说了一下，然后猛然意识到，SSID和password应该填自己家已有的WiFi...睿智了睿智了，然后就成功的连上了WiFi并作为服务器连接到了我的小板子。<br>
 晚上开始鼓捣PlatformIO，但是Upload的时候提示Timed out waiting for packet header，明天再看吧。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[关于]]></title>
-        <id>https://i207M.github.io/post/about/</id>
-        <link href="https://i207M.github.io/post/about/">
-        </link>
-        <updated>2020-07-19T10:59:52.000Z</updated>
-        <content type="html"><![CDATA[<p>i207Ｍ曾经是一位OIer，拥有NOI2019银牌。<br>
-i207M毕业于SJZEZ。<br>
-i207M进入清华大学-信息与计算科学系（强基计划）。</p>
 ]]></content>
     </entry>
 </feed>

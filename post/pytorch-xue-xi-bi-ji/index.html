@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://i207M.github.io/favicon.ico?v=1603018238130">
+<link rel="shortcut icon" href="https://i207M.github.io/favicon.ico?v=1613357857610">
 <link rel="stylesheet" href="https://i207M.github.io/styles/main.css">
 
 
@@ -25,7 +25,14 @@
 
 
     <meta name="description" content="首先学习Numpy的相关操作...
-" />
+似乎当时没有写下来...有时间再补吧
+
+Pytorch
+import torch
+import numpy as np
+
+# 判断tensor
+print(torch.is_tensor([[1, 2],..." />
     <meta name="keywords" content="Machine Learning" />
   </head>
   <body>
@@ -35,7 +42,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://i207M.github.io">
-        <img src="https://i207M.github.io/images/avatar.png?v=1603018238130" class="site-logo">
+        <img src="https://i207M.github.io/images/avatar.png?v=1613357857610" class="site-logo">
         <h1 class="site-title">i207M&#39;s Fantastic Blog</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -102,6 +109,65 @@
             
             <div class="post-content" v-pre>
               <p>首先学习Numpy的相关操作...</p>
+<p>似乎当时没有写下来...有时间再补吧</p>
+<hr>
+<h1 id="pytorch">Pytorch</h1>
+<pre><code class="language-python">import torch
+import numpy as np
+
+# 判断tensor
+print(torch.is_tensor([[1, 2], [3, 4]]))
+
+# 获得元素个数
+a = torch.tensor([1, 2])
+print(a.size())
+print(torch.numel(a))
+
+# build tensor
+a = torch.empty(2, 2, 2)  # 未初始化
+a = torch.zeros(2, 2, 2)
+a = torch.ones(2, 2, 2, dtype=torch.long)  # 可以指定数据类型
+a = torch.rand(2, 2, 2)  # 均匀分布
+a = torch.randn(2, 2, 2)  # 标准正态分布
+a = torch.randn_like(a, dtype=torch.double)  # 重载类型
+a = torch.eye(2)
+# 还可以创建正态分布的tensor
+
+# reshape (share memory)
+b = a.view(4)
+c = a.view(2, -1)
+
+# torch.tensor &lt;-&gt; numpy.array (share memory)
+np_arr = a.numpy()
+tc_tensor = torch.from_numpy(np_arr)
+
+# 特定构造
+a = torch.arange(1, 2, 0.2)  # 左闭右开以固定间隔选点(不常用，因为精度不够，请使用linspace)
+a = torch.linspace(0, 1, 100)  # 在[0,1]均匀选择100个点
+a = torch.logspace(-10, 10, 8)  # 在[10^start 10^end]上以对数刻度均匀选择steps个点
+
+# 拼接&amp;拆分
+a = a.view(2, 4)
+b = torch.cat((a, a, a), 0)  # 按行拼接
+b = torch.cat((a, a, a), 1)  # 按列拼接
+c = torch.split(b, (2, 4, 6), dim=1)  # 将dim=1拆成2,4,6大小的三部分
+
+# 转置
+a = a.t()
+
+# 保存
+torch.save(a, f='./t.pkl')
+a = torch.load(f='./t.pkl')
+
+# 运算
+# +
+# .add()
+# .add_()
+# torch.add(,,out=)
+
+</code></pre>
+<h2 id="autograd">autograd</h2>
+<p>创建一个张量并设置<code>requires_grad=True</code>用来追踪其计算历史</p>
 
             </div>
             
