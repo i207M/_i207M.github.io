@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://i207m.github.io/_i207M.github.io/</id>
     <title>i207M&apos;s Fantastic Blog</title>
-    <updated>2021-02-18T03:57:38.185Z</updated>
+    <updated>2021-02-18T03:59:06.448Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://i207m.github.io/_i207M.github.io/"/>
     <link rel="self" href="https://i207m.github.io/_i207M.github.io/atom.xml"/>
@@ -10,42 +10,6 @@
     <logo>https://i207m.github.io/_i207M.github.io/images/avatar.png</logo>
     <icon>https://i207m.github.io/_i207M.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, i207M&apos;s Fantastic Blog</rights>
-    <entry>
-        <title type="html"><![CDATA[萱]]></title>
-        <id>https://i207m.github.io/_i207M.github.io/post/xuan/</id>
-        <link href="https://i207m.github.io/_i207M.github.io/post/xuan/">
-        </link>
-        <updated>2021-01-20T07:32:52.000Z</updated>
-        <content type="html"><![CDATA[<p>1.18</p>
-<h1 id="礼物">礼物</h1>
-<p>见面 1.24</p>
-<ol>
-<li>7张贺卡</li>
-<li>钥匙链</li>
-<li>胸针 一路有你，离心最近</li>
-</ol>
-<p>除夕 2.11</p>
-<ol>
-<li>每日贺卡</li>
-<li><s>小羊公仔</s> 麋鹿</li>
-<li>小皮卡丘</li>
-</ol>
-<p>情人节 2.14</p>
-<ol>
-<li>每日贺卡</li>
-<li>纸玫瑰：折纸，涂胶</li>
-</ol>
-<p>一百天 4.28</p>
-<ol>
-<li>每日贺卡</li>
-</ol>
-<p>生日 7.3，166天</p>
-<ol>
-<li>每日贺卡</li>
-</ol>
-<p>手账本</p>
-]]></content>
-    </entry>
     <entry>
         <title type="html"><![CDATA[Pytorch学习笔记]]></title>
         <id>https://i207m.github.io/_i207M.github.io/post/pytorch-xue-xi-bi-ji/</id>
@@ -1376,6 +1340,17 @@ print((1 and [a] or [b])[0], (0 and [a] or [b])[0])
 后来花了好长时间尝试点灯（就是运行Blink实例），怎么样都不能成功，后来发现ESP-01S才有灯，我手里这个没有...<br>
 后来又花了好长时间尝试Advanced Webserver这个示例，同样是一直无解，甚至都以为自己不小心刷坏了WiFi模块...直到把这个问题给小黄鸭（家父）说了一下，然后猛然意识到，SSID和password应该填自己家已有的WiFi...睿智了睿智了，然后就成功的连上了WiFi并作为服务器连接到了我的小板子。<br>
 晚上开始鼓捣PlatformIO，但是Upload的时候提示Timed out waiting for packet header，明天再看吧。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[关于]]></title>
+        <id>https://i207m.github.io/_i207M.github.io/post/about/</id>
+        <link href="https://i207m.github.io/_i207M.github.io/post/about/">
+        </link>
+        <updated>2020-07-19T10:59:52.000Z</updated>
+        <content type="html"><![CDATA[<p>i207Ｍ曾经是一位OIer，拥有NOI2019银牌。<br>
+i207M毕业于SJZEZ。<br>
+i207M进入清华大学-信息与计算科学系（强基计划）。</p>
 ]]></content>
     </entry>
 </feed>
