@@ -1,19 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://i207m.github.io/_i207M.github.io/</id>
+    <id>https://blog.i207m.top/_i207M.github.io/</id>
     <title>i207M&apos;s Fantastic Blog</title>
-    <updated>2021-02-18T05:18:06.057Z</updated>
+    <updated>2021-02-19T00:55:27.781Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://i207m.github.io/_i207M.github.io/"/>
-    <link rel="self" href="https://i207m.github.io/_i207M.github.io/atom.xml"/>
+    <link rel="alternate" href="https://blog.i207m.top/_i207M.github.io/"/>
+    <link rel="self" href="https://blog.i207m.top/_i207M.github.io/atom.xml"/>
     <subtitle>Lover - 世界都是我</subtitle>
-    <logo>https://i207m.github.io/_i207M.github.io/images/avatar.png</logo>
-    <icon>https://i207m.github.io/_i207M.github.io/favicon.ico</icon>
+    <logo>https://blog.i207m.top/_i207M.github.io/images/avatar.png</logo>
+    <icon>https://blog.i207m.top/_i207M.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, i207M&apos;s Fantastic Blog</rights>
     <entry>
+        <title type="html"><![CDATA[萱]]></title>
+        <id>https://blog.i207m.top/_i207M.github.io/post/xuan/</id>
+        <link href="https://blog.i207m.top/_i207M.github.io/post/xuan/">
+        </link>
+        <updated>2021-01-20T07:32:52.000Z</updated>
+        <content type="html"><![CDATA[<p>1.18</p>
+<h1 id="礼物">礼物</h1>
+<p>见面 1.24</p>
+<ol>
+<li>7张贺卡</li>
+<li>钥匙链</li>
+<li>胸针 一路有你，离心最近</li>
+</ol>
+<p>除夕 2.11</p>
+<ol>
+<li>每日贺卡</li>
+<li><s>小羊公仔</s> 麋鹿</li>
+<li>小皮卡丘</li>
+</ol>
+<p>情人节 2.14</p>
+<ol>
+<li>每日贺卡</li>
+<li>纸玫瑰：折纸，涂胶</li>
+</ol>
+<p>一百天 4.28</p>
+<ol>
+<li>每日贺卡</li>
+</ol>
+<p>生日 7.3，166天</p>
+<ol>
+<li>每日贺卡</li>
+</ol>
+<p>手账本</p>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[Pytorch学习笔记]]></title>
-        <id>https://i207m.github.io/_i207M.github.io/post/pytorch-xue-xi-bi-ji/</id>
-        <link href="https://i207m.github.io/_i207M.github.io/post/pytorch-xue-xi-bi-ji/">
+        <id>https://blog.i207m.top/_i207M.github.io/post/pytorch-xue-xi-bi-ji/</id>
+        <link href="https://blog.i207m.top/_i207M.github.io/post/pytorch-xue-xi-bi-ji/">
         </link>
         <updated>2020-10-18T10:48:37.000Z</updated>
         <content type="html"><![CDATA[<p>首先学习Numpy的相关操作...</p>
@@ -80,8 +116,8 @@ a = torch.load(f='./t.pkl')
     </entry>
     <entry>
         <title type="html"><![CDATA[正则表达式-学习笔记]]></title>
-        <id>https://i207m.github.io/_i207M.github.io/post/zheng-ze-biao-da-shi-xue-xi-bi-ji/</id>
-        <link href="https://i207m.github.io/_i207M.github.io/post/zheng-ze-biao-da-shi-xue-xi-bi-ji/">
+        <id>https://blog.i207m.top/_i207M.github.io/post/zheng-ze-biao-da-shi-xue-xi-bi-ji/</id>
+        <link href="https://blog.i207m.top/_i207M.github.io/post/zheng-ze-biao-da-shi-xue-xi-bi-ji/">
         </link>
         <updated>2020-08-13T06:06:34.000Z</updated>
         <content type="html"><![CDATA[<p>From <a href="https://www.luogu.com.cn/blog/0AND1STORY/zheng-ze-biao-da-shi">洛谷日报</a></p>
@@ -208,8 +244,8 @@ print(y) # this is ok
     </entry>
     <entry>
         <title type="html"><![CDATA[Python学习笔记-网络编程]]></title>
-        <id>https://i207m.github.io/_i207M.github.io/post/python-wang-luo-bian-cheng/</id>
-        <link href="https://i207m.github.io/_i207M.github.io/post/python-wang-luo-bian-cheng/">
+        <id>https://blog.i207m.top/_i207M.github.io/post/python-wang-luo-bian-cheng/</id>
+        <link href="https://blog.i207m.top/_i207M.github.io/post/python-wang-luo-bian-cheng/">
         </link>
         <updated>2020-08-12T01:50:43.000Z</updated>
         <content type="html"><![CDATA[<p>学会urllib和requests之后，再来学学底层的TCP协议（UDP鸽了）。</p>
@@ -298,8 +334,8 @@ s.close()
     </entry>
     <entry>
         <title type="html"><![CDATA[Python学习笔记-图形界面]]></title>
-        <id>https://i207m.github.io/_i207M.github.io/post/python-xue-xi-bi-ji-tu-xing-jie-mian/</id>
-        <link href="https://i207m.github.io/_i207M.github.io/post/python-xue-xi-bi-ji-tu-xing-jie-mian/">
+        <id>https://blog.i207m.top/_i207M.github.io/post/python-xue-xi-bi-ji-tu-xing-jie-mian/</id>
+        <link href="https://blog.i207m.top/_i207M.github.io/post/python-xue-xi-bi-ji-tu-xing-jie-mian/">
         </link>
         <updated>2020-08-11T08:22:13.000Z</updated>
         <content type="html"><![CDATA[<p>python支持多种图形界面的第三方库，包括：Tk,Qt,GTK等。python自带的是支持Tk的Tkinter。</p>
@@ -339,8 +375,8 @@ app.mainloop()
     </entry>
     <entry>
         <title type="html"><![CDATA[Python学习笔记-爬虫探索]]></title>
-        <id>https://i207m.github.io/_i207M.github.io/post/python-pa-chong-tan-suo/</id>
-        <link href="https://i207m.github.io/_i207M.github.io/post/python-pa-chong-tan-suo/">
+        <id>https://blog.i207m.top/_i207M.github.io/post/python-pa-chong-tan-suo/</id>
+        <link href="https://blog.i207m.top/_i207M.github.io/post/python-pa-chong-tan-suo/">
         </link>
         <updated>2020-08-09T01:41:49.000Z</updated>
         <content type="html"><![CDATA[<h1 id="百度翻译">百度翻译</h1>
@@ -406,8 +442,8 @@ except requests.RequestException as e:
     </entry>
     <entry>
         <title type="html"><![CDATA[录取后小记]]></title>
-        <id>https://i207m.github.io/_i207M.github.io/post/lu-qu-hou-xiao-ji/</id>
-        <link href="https://i207m.github.io/_i207M.github.io/post/lu-qu-hou-xiao-ji/">
+        <id>https://blog.i207m.top/_i207M.github.io/post/lu-qu-hou-xiao-ji/</id>
+        <link href="https://blog.i207m.top/_i207M.github.io/post/lu-qu-hou-xiao-ji/">
         </link>
         <updated>2020-08-06T13:46:46.000Z</updated>
         <content type="html"><![CDATA[<p>你这个人怎么这么鸽啊！<br>
@@ -416,8 +452,8 @@ except requests.RequestException as e:
     </entry>
     <entry>
         <title type="html"><![CDATA[VS Code使用技巧]]></title>
-        <id>https://i207m.github.io/_i207M.github.io/post/vs-code-shi-yong-ji-qiao/</id>
-        <link href="https://i207m.github.io/_i207M.github.io/post/vs-code-shi-yong-ji-qiao/">
+        <id>https://blog.i207m.top/_i207M.github.io/post/vs-code-shi-yong-ji-qiao/</id>
+        <link href="https://blog.i207m.top/_i207M.github.io/post/vs-code-shi-yong-ji-qiao/">
         </link>
         <updated>2020-08-04T11:13:42.000Z</updated>
         <content type="html"><![CDATA[<p><em>8.4：今天有点摸，干脆学学VS Code里有没有我还不知道的小技巧。</em></p>
@@ -435,8 +471,8 @@ except requests.RequestException as e:
     </entry>
     <entry>
         <title type="html"><![CDATA[Python学习笔记]]></title>
-        <id>https://i207m.github.io/_i207M.github.io/post/python-xue-xi-bi-ji/</id>
-        <link href="https://i207m.github.io/_i207M.github.io/post/python-xue-xi-bi-ji/">
+        <id>https://blog.i207m.top/_i207M.github.io/post/python-xue-xi-bi-ji/</id>
+        <link href="https://blog.i207m.top/_i207M.github.io/post/python-xue-xi-bi-ji/">
         </link>
         <updated>2020-07-31T09:25:07.000Z</updated>
         <content type="html"><![CDATA[<p>Learn from <a href="https://www.liaoxuefeng.com/wiki/1016959663602400">this</a></p>
@@ -1330,8 +1366,8 @@ print((1 and [a] or [b])[0], (0 and [a] or [b])[0])
     </entry>
     <entry>
         <title type="html"><![CDATA[物联网开发笔记]]></title>
-        <id>https://i207m.github.io/_i207M.github.io/post/iot-kai-fa-ru-men/</id>
-        <link href="https://i207m.github.io/_i207M.github.io/post/iot-kai-fa-ru-men/">
+        <id>https://blog.i207m.top/_i207M.github.io/post/iot-kai-fa-ru-men/</id>
+        <link href="https://blog.i207m.top/_i207M.github.io/post/iot-kai-fa-ru-men/">
         </link>
         <updated>2020-07-30T14:28:23.000Z</updated>
         <content type="html"><![CDATA[<h2 id="2020730">2020.7.30</h2>
@@ -1340,17 +1376,6 @@ print((1 and [a] or [b])[0], (0 and [a] or [b])[0])
 后来花了好长时间尝试点灯（就是运行Blink实例），怎么样都不能成功，后来发现ESP-01S才有灯，我手里这个没有...<br>
 后来又花了好长时间尝试Advanced Webserver这个示例，同样是一直无解，甚至都以为自己不小心刷坏了WiFi模块...直到把这个问题给小黄鸭（家父）说了一下，然后猛然意识到，SSID和password应该填自己家已有的WiFi...睿智了睿智了，然后就成功的连上了WiFi并作为服务器连接到了我的小板子。<br>
 晚上开始鼓捣PlatformIO，但是Upload的时候提示Timed out waiting for packet header，明天再看吧。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[关于]]></title>
-        <id>https://i207m.github.io/_i207M.github.io/post/about/</id>
-        <link href="https://i207m.github.io/_i207M.github.io/post/about/">
-        </link>
-        <updated>2020-07-19T10:59:52.000Z</updated>
-        <content type="html"><![CDATA[<p>i207Ｍ曾经是一位OIer，拥有NOI2019银牌。<br>
-i207M毕业于SJZEZ。<br>
-i207M进入清华大学-信息与计算科学系（强基计划）。</p>
 ]]></content>
     </entry>
 </feed>
